@@ -1,0 +1,348 @@
+{
+  "scraped_at": "2026-01-14T14:40:13.427185",
+  "source_url": "https://docs.docker.com/security/security-announcements/",
+  "total_vulnerabilities": 12,
+  "total_cves": 13,
+  "vulnerabilities": [
+    {
+      "title": "Docker Desktop 4.54.0 security update: CVE-2025-13743",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.660575",
+      "cve_ids": [
+        "CVE-2025-13743"
+      ],
+      "content_html": "<p>A vulnerability in Docker Desktop was fixed on December 4 in the\n<a class=\"link\" href=\"https://docs.docker.com/desktop/release-notes/#4540\">4.54.0</a> release:</p>\n<ul><li>Fixed <a class=\"link\" href=\"https://www.cve.org/cverecord?id=CVE-2025-13743\" rel=\"noopener\">CVE-2025-13743</a> where Docker Desktop diagnostics bundles were found to include expired Hub PATs in log output due to error object serialization.</li></ul>",
+      "description": "A vulnerability in Docker Desktop was fixed on December 4 in the4.54.0release:",
+      "details": [
+        "FixedCVE-2025-13743where Docker Desktop diagnostics bundles were found to include expired Hub PATs in log output due to error object serialization."
+      ],
+      "cve_links": [
+        {
+          "text": "CVE-2025-13743",
+          "url": "https://www.cve.org/cverecord?id=CVE-2025-13743"
+        }
+      ],
+      "fixed_version": "4.54.0"
+    },
+    {
+      "title": "Docker Desktop 4.49.0 security update: CVE-2025-9164",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.660981",
+      "cve_ids": [
+        "CVE-2025-9164"
+      ],
+      "content_html": "<p>A vulnerability in Docker Desktop for Windows was fixed on October 23 in the\n<a class=\"link\" href=\"https://docs.docker.com/desktop/release-notes/#4490\">4.49.0</a> release:</p>\n<ul><li>Fixed <a class=\"link\" href=\"https://www.cve.org/cverecord?id=CVE-2025-9164\" rel=\"noopener\">CVE-2025-9164</a> where the Docker Desktop for Windows installer was vulnerable to DLL hijacking due to insecure DLL search order. The installer searches for required DLLs in the user's Downloads folder before checking system directories, allowing local privilege escalation through malicious DLL placement.</li></ul>",
+      "description": "A vulnerability in Docker Desktop for Windows was fixed on October 23 in the4.49.0release:",
+      "details": [
+        "FixedCVE-2025-9164where the Docker Desktop for Windows installer was vulnerable to DLL hijacking due to insecure DLL search order. The installer searches for required DLLs in the user's Downloads folder before checking system directories, allowing local privilege escalation through malicious DLL placement."
+      ],
+      "cve_links": [
+        {
+          "text": "CVE-2025-9164",
+          "url": "https://www.cve.org/cverecord?id=CVE-2025-9164"
+        }
+      ],
+      "fixed_version": "4.49.0"
+    },
+    {
+      "title": "Docker Desktop 4.47.0 security update: CVE-2025-10657",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.661259",
+      "cve_ids": [
+        "CVE-2025-10657"
+      ],
+      "content_html": "<p>A vulnerability in Docker Desktop was fixed on September 25 in the\n<a class=\"link\" href=\"https://docs.docker.com/desktop/release-notes/#4470\">4.47.0</a> release:</p>\n<ul><li>Fixed <a class=\"link\" href=\"https://www.cve.org/CVERecord?id=CVE-2025-10657\" rel=\"noopener\">CVE-2025-10657</a> where the Enhanced Container Isolation <a class=\"link\" href=\"https://docs.docker.com/enterprise/security/hardened-desktop/enhanced-container-isolation/config/#command-restrictions\">Docker Socket command restrictions</a> feature was not working properly in Docker Desktop 4.46.0 only (the configuration for it was being ignored).</li></ul>",
+      "description": "A vulnerability in Docker Desktop was fixed on September 25 in the4.47.0release:",
+      "details": [
+        "FixedCVE-2025-10657where the Enhanced Container IsolationDocker Socket command restrictionsfeature was not working properly in Docker Desktop 4.46.0 only (the configuration for it was being ignored)."
+      ],
+      "cve_links": [
+        {
+          "text": "CVE-2025-10657",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-10657"
+        }
+      ],
+      "fixed_version": "4.47.0"
+    },
+    {
+      "title": "Docker Desktop 4.44.3 security update: CVE-2025-9074",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.661581",
+      "cve_ids": [
+        "CVE-2025-9074"
+      ],
+      "content_html": "<p><em>Last updated August 20, 2025</em></p>\n<p>A vulnerability in Docker Desktop was fixed on August 20 in the\n<a class=\"link\" href=\"https://docs.docker.com/desktop/release-notes/#4443\">4.44.3</a> release:</p>\n<ul><li>Fixed <a class=\"link\" href=\"https://www.cve.org/CVERecord?id=CVE-2025-9074\" rel=\"noopener\">CVE-2025-9074</a> where a malicious container running on Docker Desktop could access the Docker Engine and launch additional containers without requiring the Docker socket to be mounted. This could allow unauthorized access to user files on the host system. Enhanced Container Isolation (ECI) does not mitigate this vulnerability.</li></ul>",
+      "description": "Last updated August 20, 2025",
+      "details": [
+        "FixedCVE-2025-9074where a malicious container running on Docker Desktop could access the Docker Engine and launch additional containers without requiring the Docker socket to be mounted. This could allow unauthorized access to user files on the host system. Enhanced Container Isolation (ECI) does not mitigate this vulnerability."
+      ],
+      "cve_links": [
+        {
+          "text": "CVE-2025-9074",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-9074"
+        }
+      ],
+      "fixed_version": "4.44.3",
+      "last_updated": "Last updated August 20, 2025"
+    },
+    {
+      "title": "Docker Desktop 4.44.0 security update: CVE-2025-23266",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.661858",
+      "cve_ids": [
+        "CVE-2025-23266"
+      ],
+      "content_html": "<p><em>Last updated July 31, 2025</em></p>\n<p>We are aware of <a class=\"link\" href=\"https://nvd.nist.gov/vuln/detail/CVE-2025-23266\" rel=\"noopener\">CVE-2025-23266</a>, a critical vulnerability affecting the NVIDIA Container Toolkit in CDI mode up to version 1.17.7. Docker Desktop includes version 1.17.8, which is not impacted. However, older versions of Docker Desktop that bundled earlier toolkit versions may be affected if CDI mode was manually enabled. Upgrade to Docker Desktop 4.44 or later to ensure you're using the patched version.</p>",
+      "description": "Last updated July 31, 2025",
+      "cve_links": [
+        {
+          "text": "CVE-2025-23266",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-23266"
+        }
+      ],
+      "last_updated": "Last updated July 31, 2025"
+    },
+    {
+      "title": "Docker Desktop 4.43.0 security update: CVE-2025-6587",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.662054",
+      "cve_ids": [
+        "CVE-2025-6587"
+      ],
+      "content_html": "<p><em>Last updated July 03, 2025</em></p>\n<p>A vulnerability in Docker Desktop was fixed on July 03 in the\n<a class=\"link\" href=\"https://docs.docker.com/desktop/release-notes/#4430\">4.43.0</a> release:</p>\n<ul><li>Fixed <a class=\"link\" href=\"https://www.cve.org/CVERecord?id=CVE-2025-6587\" rel=\"noopener\">CVE-2025-6587</a> where sensitive system environment variables were included in Docker Desktop diagnostic logs, allowing for potential secret exposure.</li></ul>",
+      "description": "Last updated July 03, 2025",
+      "details": [
+        "FixedCVE-2025-6587where sensitive system environment variables were included in Docker Desktop diagnostic logs, allowing for potential secret exposure."
+      ],
+      "cve_links": [
+        {
+          "text": "CVE-2025-6587",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-6587"
+        }
+      ],
+      "fixed_version": "4.43.0",
+      "last_updated": "Last updated July 03, 2025"
+    },
+    {
+      "title": "Docker Desktop 4.41.0 Security Update: CVE-2025-3224, CVE-2025-4095, and CVE-2025-3911",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.662324",
+      "cve_ids": [
+        "CVE-2025-3224",
+        "CVE-2025-4095",
+        "CVE-2025-3911"
+      ],
+      "content_html": "<p><em>Last updated May 15, 2025</em></p>\n<p>Three vulnerabilities in Docker Desktop were fixed on April 28 in the\n<a class=\"link\" href=\"https://docs.docker.com/desktop/release-notes/#4410\">4.41.0</a> release.</p>\n<ul><li>Fixed <a class=\"link\" href=\"https://www.cve.org/CVERecord?id=CVE-2025-3224\" rel=\"noopener\">CVE-2025-3224</a> allowing an attacker with access to a user machine to perform an elevation of privilege when Docker Desktop updates.</li><li>Fixed <a class=\"link\" href=\"https://www.cve.org/CVERecord?id=CVE-2025-4095\" rel=\"noopener\">CVE-2025-4095</a> where Registry Access Management (RAM) policies were not enforced when using a MacOS configuration profile, allowing users to pull images from unapproved registries.</li><li>Fixed <a class=\"link\" href=\"https://www.cve.org/CVERecord?id=CVE-2025-3911\" rel=\"noopener\">CVE-2025-3911</a> allowing an attacker with read access to a user's machine to obtain sensitive information from Docker Desktop log files, including environment variables configured for running containers.</li></ul>\n<p>We strongly encourage you to update to Docker Desktop\n<a class=\"link\" href=\"https://docs.docker.com/desktop/release-notes/#4410\">4.41.0</a>.</p>",
+      "description": "Last updated May 15, 2025",
+      "details": [
+        "FixedCVE-2025-3224allowing an attacker with access to a user machine to perform an elevation of privilege when Docker Desktop updates.",
+        "FixedCVE-2025-4095where Registry Access Management (RAM) policies were not enforced when using a MacOS configuration profile, allowing users to pull images from unapproved registries.",
+        "FixedCVE-2025-3911allowing an attacker with read access to a user's machine to obtain sensitive information from Docker Desktop log files, including environment variables configured for running containers."
+      ],
+      "cve_links": [
+        {
+          "text": "CVE-2025-3224",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-3224"
+        },
+        {
+          "text": "CVE-2025-4095",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-4095"
+        },
+        {
+          "text": "CVE-2025-3911",
+          "url": "https://www.cve.org/CVERecord?id=CVE-2025-3911"
+        }
+      ],
+      "fixed_version": "4.41.0",
+      "last_updated": "Last updated May 15, 2025"
+    },
+    {
+      "title": "Docker Desktop 4.34.2 Security Update: CVE-2024-8695 and CVE-2024-8696",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.662777",
+      "cve_ids": [
+        "CVE-2024-8695",
+        "CVE-2024-8696"
+      ],
+      "content_html": "<p><em>Last updated September 13, 2024</em></p>\n<p>Two remote code execution (RCE) vulnerabilities in Docker Desktop related to Docker Extensions were reported by <a class=\"link\" href=\"https://cure53.de/\" rel=\"noopener\">Cure53</a> and were fixed on September 12 in the\n<a class=\"link\" href=\"https://docs.docker.com/desktop/release-notes/#4342\">4.34.2</a> release.</p>\n<ul><li><a class=\"link\" href=\"https://www.cve.org/cverecord?id=CVE-2024-8695\" rel=\"noopener\">CVE-2024-8695</a>: A remote code execution (RCE) vulnerability via crafted extension description/changelog could be abused by a malicious extension in Docker Desktop before 4.34.2. [Critical]</li><li><a class=\"link\" href=\"https://www.cve.org/cverecord?id=CVE-2024-8696\" rel=\"noopener\">CVE-2024-8696</a>: A remote code execution (RCE) vulnerability via crafted extension publisher-url/additional-urls could be abused by a malicious extension in Docker Desktop before 4.34.2. [High]</li></ul>\n<p>No existing extensions exploiting the vulnerabilities were found in the Extensions Marketplace. The Docker Team will be closely monitoring and diligently reviewing any requests for publishing new extensions.</p>\n<p>We strongly encourage you to update to Docker Desktop\n<a class=\"link\" href=\"https://docs.docker.com/desktop/release-notes/#4342\">4.34.2</a>. If you are unable to update promptly, you can\n<a class=\"link\" href=\"https://docs.docker.com/extensions/settings-feedback/#turn-on-or-turn-off-extensions\">disable Docker Extensions</a> as a workaround.</p>",
+      "description": "Last updated September 13, 2024",
+      "details": [
+        "CVE-2024-8695: A remote code execution (RCE) vulnerability via crafted extension description/changelog could be abused by a malicious extension in Docker Desktop before 4.34.2. [Critical]",
+        "CVE-2024-8696: A remote code execution (RCE) vulnerability via crafted extension publisher-url/additional-urls could be abused by a malicious extension in Docker Desktop before 4.34.2. [High]"
+      ],
+      "cve_links": [
+        {
+          "text": "CVE-2024-8695",
+          "url": "https://www.cve.org/cverecord?id=CVE-2024-8695"
+        },
+        {
+          "text": "CVE-2024-8696",
+          "url": "https://www.cve.org/cverecord?id=CVE-2024-8696"
+        }
+      ],
+      "fixed_version": "4.34.2",
+      "last_updated": "Last updated September 13, 2024"
+    },
+    {
+      "title": "Text4Shell CVE-2022-42889",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.663265",
+      "cve_ids": [
+        "CVE-2022-42889"
+      ],
+      "content_html": "<p><em>Last updated October 2022</em></p>\n<p><a class=\"link\" href=\"https://nvd.nist.gov/vuln/detail/CVE-2022-42889\" rel=\"noopener\">CVE-2022-42889</a> has been discovered in the popular Apache Commons Text library. Versions of this library up to but not including 1.10.0 are affected by this vulnerability.</p>\n<p>We strongly encourage you to update to the latest version of <a class=\"link\" href=\"https://commons.apache.org/proper/commons-text/download_text.cgi\" rel=\"noopener\">Apache Commons Text</a>.</p>",
+      "description": "Last updated October 2022",
+      "cve_links": [
+        {
+          "text": "CVE-2022-42889",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2022-42889"
+        }
+      ],
+      "last_updated": "Last updated October 2022"
+    },
+    {
+      "title": "Docker Official Images impacted by CVE-2022-42889",
+      "heading_level": "h3",
+      "scraped_at": "2026-01-14T14:39:51.663519",
+      "cve_ids": [
+        "CVE-2022-42889"
+      ],
+      "content_html": "<p>A number of <a class=\"link\" href=\"https://docs.docker.com/docker-hub/image-library/trusted-content/#docker-official-images\">Docker Official Images</a> contain the vulnerable versions of\nApache Commons Text. The following lists Docker Official Images that\nmay contain the vulnerable versions of Apache Commons Text:</p>\n<ul><li><a class=\"link\" href=\"https://hub.docker.com/_/bonita\" rel=\"noopener\">bonita</a></li><li><a class=\"link\" href=\"https://hub.docker.com/_/couchbase\" rel=\"noopener\">Couchbase</a></li><li><a class=\"link\" href=\"https://hub.docker.com/_/geonetwork\" rel=\"noopener\">Geonetwork</a></li><li><a class=\"link\" href=\"https://hub.docker.com/_/neo4j\" rel=\"noopener\">neo4j</a></li><li><a class=\"link\" href=\"https://hub.docker.com/_/sliverpeas\" rel=\"noopener\">sliverpeas</a></li><li><a class=\"link\" href=\"https://hub.docker.com/_/solr\" rel=\"noopener\">solr</a></li><li><a class=\"link\" href=\"https://hub.docker.com/_/xwiki\" rel=\"noopener\">xwiki</a></li></ul>\n<p>We have updated\nApache Commons Text in these images to the latest version. Some of these images may not be\nvulnerable for other reasons. We recommend that you also review the guidelines published on the upstream websites.</p>",
+      "description": "A number ofDocker Official Imagescontain the vulnerable versions of\nApache Commons Text. The following lists Docker Official Images that\nmay contain the vulnerable versions of Apache Commons Text:",
+      "details": [
+        "bonita",
+        "Couchbase",
+        "Geonetwork",
+        "neo4j",
+        "sliverpeas",
+        "solr",
+        "xwiki"
+      ],
+      "cve_links": []
+    },
+    {
+      "title": "Log4j 2 CVE-2021-44228",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.664097",
+      "cve_ids": [
+        "CVE-2021-44228"
+      ],
+      "content_html": "<p><em>Last updated December 2021</em></p>\n<p>The <a class=\"link\" href=\"https://nvd.nist.gov/vuln/detail/CVE-2021-44228\" rel=\"noopener\">Log4j 2 CVE-2021-44228</a> vulnerability in Log4j 2, a very common Java logging library, allows remote code execution, often from a context that is easily available to an attacker. For example, it was found in Minecraft servers which allowed the commands to be typed into chat logs as these were then sent to the logger. This makes it a very serious vulnerability, as the logging library is used so widely and it may be simple to exploit. Many open source maintainers are working hard with fixes and updates to the software ecosystem.</p>\n<p>The vulnerable versions of Log4j 2 are versions 2.0 to version 2.14.1 inclusive. The first fixed version is 2.15.0. We strongly encourage you to update to the <a class=\"link\" href=\"https://logging.apache.org/log4j/2.x/download.html\" rel=\"noopener\">latest version</a> if you can. If you are using a version before 2.0, you are also not vulnerable.</p>\n<p>You may not be vulnerable if you are using these versions, as your configuration\nmay already mitigate this, or the things you\nlog may not include any user input. This may be difficult to validate however\nwithout understanding all the code paths that may log in detail, and where they\nmay get input from. So you probably will want to upgrade all code using\nvulnerable versions.</p>\n<blockquote class=\"admonition not-prose\"><p>CVE-2021-45046</p><p>As an update to\n<a class=\"link\" href=\"https://nvd.nist.gov/vuln/detail/CVE-2021-44228\" rel=\"noopener\">CVE-2021-44228</a>, the fix made in version 2.15.0 was\nincomplete. Additional issues have been identified and are tracked with\n<a class=\"link\" href=\"https://nvd.nist.gov/vuln/detail/CVE-2021-45046\" rel=\"noopener\">CVE-2021-45046</a> and\n<a class=\"link\" href=\"https://nvd.nist.gov/vuln/detail/CVE-2021-45105\" rel=\"noopener\">CVE-2021-45105</a>.\nFor a more complete fix to this vulnerability, we recommended that you update to 2.17.0 where possible.</p></blockquote>",
+      "description": "Last updated December 2021",
+      "cve_links": [
+        {
+          "text": "Log4j 2 CVE-2021-44228",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-44228"
+        },
+        {
+          "text": "CVE-2021-44228",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-44228"
+        },
+        {
+          "text": "CVE-2021-45046",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-45046"
+        },
+        {
+          "text": "CVE-2021-45105",
+          "url": "https://nvd.nist.gov/vuln/detail/CVE-2021-45105"
+        }
+      ],
+      "last_updated": "Last updated December 2021"
+    },
+    {
+      "title": "Docker Official Images impacted by Log4j 2 CVE",
+      "heading_level": "h2",
+      "scraped_at": "2026-01-14T14:39:51.664550",
+      "cve_ids": [],
+      "content_html": "<p><em>Last updated December 2021</em></p>\n<p>A number of <a class=\"link\" href=\"https://docs.docker.com/docker-hub/image-library/trusted-content/#docker-official-images\">Docker Official Images</a> contain the vulnerable versions of\nLog4j 2 CVE-2021-44228. The following table lists Docker Official Images that\nmay contained the vulnerable versions of Log4j 2. We updated Log4j 2 in these images to the latest version. Some of these images may not be\nvulnerable for other reasons. We recommend that you also review the guidelines published on the upstream websites.</p>\n<div class=\"overflow-x-auto\"><table><thead class=\"bg-gray-100 dark:bg-gray-800\"><tr><th class=\"p-2\" style=\"text-align:left\">Repository</th><th class=\"p-2\" style=\"text-align:left\">Patched version</th><th class=\"p-2\" style=\"text-align:left\">Additional documentation</th></tr></thead><tbody><tr><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://hub.docker.com/_/couchbase\" rel=\"noopener\">couchbase</a></td><td class=\"p-2\" style=\"text-align:left\">7.0.3</td><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://blog.couchbase.com/what-to-know-about-the-log4j-vulnerability-cve-2021-44228/\" rel=\"noopener\">Couchbase blog</a></td></tr><tr><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://hub.docker.com/_/elasticsearch\" rel=\"noopener\">Elasticsearch</a></td><td class=\"p-2\" style=\"text-align:left\">6.8.22, 7.16.2</td><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://www.elastic.co/blog/new-elasticsearch-and-logstash-releases-upgrade-apache-log4j2\" rel=\"noopener\">Elasticsearch announcement</a></td></tr><tr><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://hub.docker.com/_/flink\" rel=\"noopener\">Flink</a></td><td class=\"p-2\" style=\"text-align:left\">1.11.6, 1.12.7, 1.13.5, 1.14.2</td><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://flink.apache.org/2021/12/10/log4j-cve.html\" rel=\"noopener\">Flink advice on Log4j CVE</a></td></tr><tr><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://hub.docker.com/_/geonetwork\" rel=\"noopener\">Geonetwork</a></td><td class=\"p-2\" style=\"text-align:left\">3.10.10</td><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://github.com/geonetwork/core-geonetwork/issues/6076\" rel=\"noopener\">Geonetwork GitHub discussion</a></td></tr><tr><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://hub.docker.com/_/lightstreamer\" rel=\"noopener\">lightstreamer</a></td><td class=\"p-2\" style=\"text-align:left\">Awaiting info</td><td class=\"p-2\" style=\"text-align:left\">Awaiting info</td></tr><tr><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://hub.docker.com/_/logstash\" rel=\"noopener\">logstash</a></td><td class=\"p-2\" style=\"text-align:left\">6.8.22, 7.16.2</td><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://www.elastic.co/blog/new-elasticsearch-and-logstash-releases-upgrade-apache-log4j2\" rel=\"noopener\">Elasticsearch announcement</a></td></tr><tr><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://hub.docker.com/_/neo4j\" rel=\"noopener\">neo4j</a></td><td class=\"p-2\" style=\"text-align:left\">4.4.2</td><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://community.neo4j.com/t/log4j-cve-mitigation-for-neo4j/48856\" rel=\"noopener\">Neo4j announcement</a></td></tr><tr><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://hub.docker.com/_/solr\" rel=\"noopener\">solr</a></td><td class=\"p-2\" style=\"text-align:left\">8.11.1</td><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://solr.apache.org/security.html#apache-solr-affected-by-apache-log4j-cve-2021-44228\" rel=\"noopener\">Solr security news</a></td></tr><tr><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://hub.docker.com/_/sonarqube\" rel=\"noopener\">sonarqube</a></td><td class=\"p-2\" style=\"text-align:left\">8.9.5, 9.2.2</td><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://community.sonarsource.com/t/sonarqube-sonarcloud-and-the-log4j-vulnerability/54721\" rel=\"noopener\">SonarQube announcement</a></td></tr><tr><td class=\"p-2\" style=\"text-align:left\"><a class=\"link\" href=\"https://hub.docker.com/_/storm\" rel=\"noopener\">storm</a></td><td class=\"p-2\" style=\"text-align:left\">Awaiting info</td><td class=\"p-2\" style=\"text-align:left\">Awaiting info</td></tr></tbody></table></div>\n<blockquote class=\"admonition admonition-note admonition not-prose\"><div class=\"admonition-header\"><span class=\"admonition-icon\"><svg fill=\"none\" height=\"24\" viewbox=\"0 0 24 24\" width=\"24\"><path d=\"M12 16V12m0-4H12.01M22 12c0 5.5228-4.4772 10-10 10C6.47715 22 2 17.5228 2 12 2 6.47715 6.47715 2 12 2c5.5228.0 10 4.47715 10 10z\" stroke=\"currentColor\" stroke-linecap=\"round\" stroke-linejoin=\"round\" stroke-width=\"2\"></path></svg>\n</span><span class=\"admonition-title\">Note</span></div><div class=\"admonition-content\"><p>Although <a class=\"link\" href=\"https://hub.docker.com/_/xwiki\" rel=\"noopener\">xwiki</a> images may be detected as vulnerable\nby some scanners, the authors believe the images are not vulnerable by Log4j 2\nCVE as the API jars do not contain the vulnerability.\nThe <a class=\"link\" href=\"https://hub.docker.com/_/nuxeo\" rel=\"noopener\">Nuxeo</a>\nimage is deprecated and will not be updated.</p></div></blockquote>",
+      "description": "Last updated December 2021",
+      "cve_links": [
+        {
+          "text": "Flink advice on Log4j CVE",
+          "url": "https://flink.apache.org/2021/12/10/log4j-cve.html"
+        }
+      ],
+      "last_updated": "Last updated December 2021"
+    }
+  ],
+  "cve_details": {
+    "CVE-2025-3224": {
+      "cve_id": "CVE-2025-3224",
+      "url": "https://cve.org/CVERecord?id=CVE-2025-3224",
+      "scraped_at": "2026-01-14T14:39:54.114777",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2024-8696": {
+      "cve_id": "CVE-2024-8696",
+      "url": "https://cve.org/CVERecord?id=CVE-2024-8696",
+      "scraped_at": "2026-01-14T14:39:55.724390",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2025-13743": {
+      "cve_id": "CVE-2025-13743",
+      "url": "https://cve.org/CVERecord?id=CVE-2025-13743",
+      "scraped_at": "2026-01-14T14:39:57.373255",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2021-44228": {
+      "cve_id": "CVE-2021-44228",
+      "url": "https://cve.org/CVERecord?id=CVE-2021-44228",
+      "scraped_at": "2026-01-14T14:39:58.980456",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2024-8695": {
+      "cve_id": "CVE-2024-8695",
+      "url": "https://cve.org/CVERecord?id=CVE-2024-8695",
+      "scraped_at": "2026-01-14T14:40:00.572985",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2025-4095": {
+      "cve_id": "CVE-2025-4095",
+      "url": "https://cve.org/CVERecord?id=CVE-2025-4095",
+      "scraped_at": "2026-01-14T14:40:02.197941",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2025-9074": {
+      "cve_id": "CVE-2025-9074",
+      "url": "https://cve.org/CVERecord?id=CVE-2025-9074",
+      "scraped_at": "2026-01-14T14:40:03.818935",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2025-9164": {
+      "cve_id": "CVE-2025-9164",
+      "url": "https://cve.org/CVERecord?id=CVE-2025-9164",
+      "scraped_at": "2026-01-14T14:40:05.416687",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2025-3911": {
+      "cve_id": "CVE-2025-3911",
+      "url": "https://cve.org/CVERecord?id=CVE-2025-3911",
+      "scraped_at": "2026-01-14T14:40:07.021533",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2025-23266": {
+      "cve_id": "CVE-2025-23266",
+      "url": "https://cve.org/CVERecord?id=CVE-2025-23266",
+      "scraped_at": "2026-01-14T14:40:08.619711",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2022-42889": {
+      "cve_id": "CVE-2022-42889",
+      "url": "https://cve.org/CVERecord?id=CVE-2022-42889",
+      "scraped_at": "2026-01-14T14:40:10.218087",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2025-6587": {
+      "cve_id": "CVE-2025-6587",
+      "url": "https://cve.org/CVERecord?id=CVE-2025-6587",
+      "scraped_at": "2026-01-14T14:40:11.827773",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    },
+    "CVE-2025-10657": {
+      "cve_id": "CVE-2025-10657",
+      "url": "https://cve.org/CVERecord?id=CVE-2025-10657",
+      "scraped_at": "2026-01-14T14:40:13.425885",
+      "full_html": "<!DOCTYPE html>\n<html lang=\"en\">\n  <head>\n    <meta charset=\"utf-8\">\n    <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">\n    <meta name=\"viewport\" content=\"width=device-width,initial-scale=1.0\">\n    <link rel=\"icon\" type=\"image/x-icon\" href=\"/cvePurpleVFavicon.svg\">\n    <script src=\"https://cmp.osano.com/AzyhULTdPkqmy4aDN/46057d56-0263-4cca-abac-9adddada4f3b/osano.js\"></script>\n    <script type=\"module\" crossorigin src=\"/assets/index-CpzodGP9.js\"></script>\n    <link rel=\"stylesheet\" crossorigin href=\"/assets/index-9ZcJ1Icg.css\">\n  </head>\n  <body class=\"has-navbar-fixed-top\">\n    <h1 hidden>Common vulnerabilities and Exposures (CVE)</h1>\n    <noscript>\n      <strong>We're sorry but the CVE Website doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>\n    </noscript>\n    <div id=\"app\"></div>\n  </body>\n</html>\n"
+    }
+  }
+}
