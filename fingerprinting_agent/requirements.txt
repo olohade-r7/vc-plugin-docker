@@ -1,0 +1,9 @@
+# Fingerprinting Agent Requirements
+# These are the dependencies needed for the fingerprinting agent to work
+
+# Core dependencies
+pydantic>=2.0.0          # For data validation and JSON serialization
+paramiko>=3.0.0          # For SSH connections (fallback, subprocess is preferred)
+
+# Already available from parent project (no need to reinstall)
+# python>=3.8

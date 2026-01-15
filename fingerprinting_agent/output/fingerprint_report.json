@@ -1,0 +1,36 @@
+{
+  "agent_metadata": {
+    "timestamp": "2026-01-15T10:34:44.869671Z",
+    "scan_type": "remote",
+    "target_host": "localhost",
+    "agent_version": "1.0.0"
+  },
+  "system_info": {
+    "os": "Ubuntu",
+    "version": "18.04",
+    "kernel": "6.12.54-linuxkit",
+    "cpu": "VirtualApple @ 2.50GHz",
+    "hostname": "3fec2c637f27"
+  },
+  "software_inventory": [
+    {
+      "productName": "Python",
+      "versionNumber": "3.6.5",
+      "architecture": "unknown",
+      "productFamily": "Runtime",
+      "vendor": "Python Software Foundation",
+      "installPath": "/usr/bin/python3",
+      "evidence": {
+        "command_run": "which python3 2>/dev/null",
+        "raw_output": "/usr/bin/python3",
+        "execution_timestamp": null
+      }
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "total_software_detected": 1,
+    "scan_type": "remote",
+    "execution_status": "success"
+  }
+}
