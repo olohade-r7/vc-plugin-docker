@@ -1,0 +1,114 @@
+{
+  "agent_metadata": {
+    "timestamp": "2026-01-15T14:06:44.843144Z",
+    "scan_type": "local",
+    "target_host": "localhost",
+    "agent_version": "1.0.0"
+  },
+  "system_info": {
+    "os": "macOS",
+    "version": "26.2",
+    "kernel": "25.2.0",
+    "cpu": "Apple M4 Pro",
+    "hostname": "PNQ-MBP-14606"
+  },
+  "software_inventory": [
+    {
+      "productName": "VS Code",
+      "versionNumber": "1.108.0",
+      "architecture": "unknown",
+      "productFamily": "IDE",
+      "vendor": "Microsoft",
+      "installPath": "/Applications/Visual Studio Code.app",
+      "evidence": {
+        "command_run": "mdfind \"kMDItemCFBundleIdentifier == 'com.microsoft.VSCode'\" 2>/dev/null | head -1",
+        "raw_output": "/Applications/Visual Studio Code.app",
+        "execution_timestamp": "2026-01-15T14:06:43.550577Z"
+      }
+    },
+    {
+      "productName": "Docker",
+      "versionNumber": "29.1.3",
+      "architecture": "unknown",
+      "productFamily": "Virtualization",
+      "vendor": "Docker Inc.",
+      "installPath": "/usr/local/bin/docker",
+      "evidence": {
+        "command_run": "which docker 2>/dev/null",
+        "raw_output": "/usr/local/bin/docker",
+        "execution_timestamp": "2026-01-15T14:06:43.716343Z"
+      }
+    },
+    {
+      "productName": "Chrome",
+      "versionNumber": "143.0.7499",
+      "architecture": "unknown",
+      "productFamily": "Browser",
+      "vendor": "Google",
+      "installPath": "/Applications/Google Chrome.app",
+      "evidence": {
+        "command_run": "mdfind \"kMDItemCFBundleIdentifier == 'com.google.Chrome'\" 2>/dev/null | head -1",
+        "raw_output": "/Applications/Google Chrome.app",
+        "execution_timestamp": "2026-01-15T14:06:44.085062Z"
+      }
+    },
+    {
+      "productName": "Slack",
+      "versionNumber": "4.47.72",
+      "architecture": "x86_64",
+      "productFamily": "Communication",
+      "vendor": "Slack Technologies",
+      "installPath": "/Applications/Slack.app",
+      "evidence": {
+        "command_run": "mdfind \"kMDItemCFBundleIdentifier == 'com.tinyspeck.slackmacgap'\" 2>/dev/null | head -1",
+        "raw_output": "/Applications/Slack.app",
+        "execution_timestamp": "2026-01-15T14:06:44.438289Z"
+      }
+    },
+    {
+      "productName": "Git",
+      "versionNumber": "Git-155)",
+      "architecture": "unknown",
+      "productFamily": "Development Tools",
+      "vendor": "Git Project",
+      "installPath": "/usr/bin/git",
+      "evidence": {
+        "command_run": "which git 2>/dev/null",
+        "raw_output": "/usr/bin/git",
+        "execution_timestamp": "2026-01-15T14:06:44.466576Z"
+      }
+    },
+    {
+      "productName": "Node.js",
+      "versionNumber": "25.2.1",
+      "architecture": "unknown",
+      "productFamily": "Runtime",
+      "vendor": "OpenJS Foundation",
+      "installPath": "/usr/local/bin/node",
+      "evidence": {
+        "command_run": "which node 2>/dev/null",
+        "raw_output": "/usr/local/bin/node",
+        "execution_timestamp": "2026-01-15T14:06:44.495995Z"
+      }
+    },
+    {
+      "productName": "Python",
+      "versionNumber": "3.9.6",
+      "architecture": "unknown",
+      "productFamily": "Runtime",
+      "vendor": "Python Software Foundation",
+      "installPath": "/Users/olohade/miniProject/scrapper/venv/bin/python3",
+      "evidence": {
+        "command_run": "which python3 2>/dev/null",
+        "raw_output": "/Users/olohade/miniProject/scrapper/venv/bin/python3",
+        "execution_timestamp": "2026-01-15T14:06:44.817086Z"
+      }
+    }
+  ],
+  "errors": [],
+  "summary": {
+    "total_software_detected": 7,
+    "scan_type": "local",
+    "execution_status": "success"
+  }
+}
