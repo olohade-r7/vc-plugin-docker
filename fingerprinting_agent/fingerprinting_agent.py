@@ -1,10 +1,4 @@
-"""
-Fingerprinting Agent - Main Orchestrator
-Coordinates system detection, software fingerprinting, and JSON export
-WHY: Central component that ties everything together and manages execution flow
-"""
-
-from typing import Optional, Dict, Any, List
+from typing import Optional, Dict, List
 from datetime import datetime
 from modules.evidence_collector import EvidenceCollector
 from modules.system_info import SystemInfoDetector
@@ -16,10 +10,6 @@ import os
 
 
 class FingerprintingAgent:
-    """
-    Main agent that orchestrates the entire fingerprinting process
-    Supports both local and remote (SSH) scanning modes
-    """
     
     def __init__(self, scan_type: str = "local", target_host: str = "localhost"):
         """
@@ -36,13 +26,6 @@ class FingerprintingAgent:
         self.ssh_connector: Optional[SSHConnector] = None
     
     def scan_local(self) -> FingerprintReport:
-        """
-        Perform local system fingerprinting
-        Runs directly on the current machine
-        
-        Returns:
-            FingerprintReport with all collected data
-        """
         print("\n" + "="*60)
         print("FINGERPRINTING AGENT - LOCAL SCAN")
         print("="*60)

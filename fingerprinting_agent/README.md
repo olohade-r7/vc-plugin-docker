@@ -1,77 +1,39 @@
-# Fingerprinting Agent - README
+# Fingerprinting Agent - System & Software Scanner
 
-## Overview
-A Python-based system fingerprinting agent that detects OS details and installed software with full evidence tracking.
+System fingerprinting tool for detecting OS details and installed software on local and remote machines via SSH.
 
-## Project Structure
+## 🎯 Purpose
+
+Identifies system specifications, installed software versions, and configurations to support vulnerability assessment and inventory management.
+
+## 🏗 Architecture
 
 ```
-fingerprinting_agent/
-├── main.py                          # Entry point
-├── fingerprinting_agent.py           # Main orchestrator
-├── models.py                         # Pydantic data models
-├── config.py                         # Configuration and target software
-├── requirements.txt                  # Dependencies
-├── modules/
-│   ├── evidence_collector.py        # Command execution and evidence tracking
-│   ├── system_info.py               # OS and system detection
-│   ├── software_fingerprinter.py    # Software detection and metadata extraction
-│   └── ssh_connector.py             # Remote SSH connections
-└── output/
-    └── fingerprint_report.json       # Generated report (created after scan)
+SSH Connector       → Remote authentication
+    ↓
+Evidence Collector  → Execute commands
+    ↓
+System Detector     → OS, kernel, CPU info
+    ↓
+Software Fingerprinter → Detect installed apps
+    ↓
+JSON Report         → Structured output
 ```
 
-## Architecture
+## 📦 Components
 
-### 1. **Models (models.py)**
-- Pydantic models for type-safe data structures
-- Defines JSON output schema
-- Ensures data integrity before export
+| Component | Purpose |
+|-----------|---------|
+| `main.py` | CLI entry point |
+| `fingerprinting_agent.py` | Orchestrator |
+| `models.py` | Pydantic data models |
+| `config.py` | Software detection configs |
+| `modules/ssh_connector.py` | Remote SSH connections |
+| `modules/evidence_collector.py` | Command execution |
+| `modules/system_info.py` | OS/system detection |
+| `modules/software_fingerprinter.py` | Software detection |
 
-### 2. **Configuration (config.py)**
-- Lists target software products to detect
-- OS-specific commands for each software
-- System information extraction commands
-- Platform-aware (macOS, Linux, Windows)
-
-### 3. **Evidence Collector (modules/evidence_collector.py)**
-- Executes shell commands (local and remote)
-- Captures stdout, stderr, return codes
-- Tracks execution history for audit trail
-- **WHY**: Ensures all findings are verifiable
-
-### 4. **System Info Detector (modules/system_info.py)**
-- Detects OS, version, kernel, CPU
-- Platform-aware execution
-- Returns structured system information
-- **WHY**: Foundation for understanding target environment
-
-### 5. **Software Fingerprinter (modules/software_fingerprinter.py)**
-- Detects installed applications
-- Extracts version numbers intelligently
-- Identifies installation paths
-- Determines architecture (arm64, x86_64)
-- **WHY**: Core intelligence for vulnerability matching
-
-### 6. **SSH Connector (modules/ssh_connector.py)**
-- Handles remote SSH connections
-- Supports key and password authentication
-- Uses subprocess (preferred) or paramiko (fallback)
-- **WHY**: Enables remote scanning without local access
-
-### 7. **Fingerprinting Agent (fingerprinting_agent.py)**
-- Orchestrates entire scanning process
-- Supports local and remote modes
-- Assembles final JSON report
-- **WHY**: Central controller that ties everything together
-
-### 8. **Main Entry Point (main.py)**
-- Command-line interface
-- Arguments parsing
-- Handles user input for local/remote scans
-- Exports report to JSON file
-
-## Usage
+## 🚀 Usage
 
 ### Local Scan
 ```bash
@@ -79,24 +41,92 @@ cd fingerprinting_agent
 python main.py --local
 ```
 
-### Remote Scan (with SSH key)
+### Remote Scan (SSH Key)
 ```bash
 python main.py --remote 192.168.1.100 --user admin --key ~/.ssh/id_rsa
 ```
 
-### Remote Scan (with password)
+### Remote Scan (Password)
 ```bash
 python main.py --remote 192.168.1.100 --user admin --password mypass
 ```
 
-### Custom Output Path
+### Custom Output
 ```bash
-python main.py --local --output /path/to/fingerprint_report.json
+python main.py --local --output custom_report.json
 ```
 
-## Output Format
+## 📤 Output
 
-The generated `fingerprint_report.json` contains:
+`output/fingerprint_report.json`:
+
+```json
+{
+  "agent_metadata": {
+    "scan_type": "local",
+    "target_host": "localhost",
+    "timestamp": "2026-01-15T10:30:00Z"
+  },
+  "system_info": {
+    "os": "macOS",
+    "version": "14.2.1",
+    "kernel": "23.3.0",
+    "cpu": "Apple M1",
+    "hostname": "MacBook-Pro.local"
+  },
+  "software_inventory": [
+    {
+      "name": "Docker",
+      "version": "24.0.6",
+      "path": "/usr/local/bin/docker",
+      "architecture": "arm64",
+      "detection_evidence": "..."
+    }
+  ],
+  "summary": {
+    "total_software_detected": 12,
+    "execution_status": "success"
+  }
+}
+```
+
+## 🔧 Configuration
+
+Edit [config.py](config.py) to add/modify software detection:
+
+```python
+TARGET_SOFTWARE = {
+    "Docker": {
+        "macos": ["docker --version"],
+        "linux": ["docker --version", "which docker"]
+    }
+}
+```
+
+## 📊 Detection Features
+
+- **System Information**: OS, version, kernel, CPU, hostname
+- **Software Detection**: Version, path, architecture
+- **Evidence Tracking**: Commands, outputs, return codes
+- **Multi-platform**: macOS, Linux, Windows support
+- **Remote Scanning**: SSH key and password auth
+
+## 🛠 Dependencies
+
+```
+paramiko>=3.0.0
+pydantic>=2.0.0
+```
+
+Install: `pip install -r requirements.txt`
+
+## 🔐 SSH Requirements
+
+For remote scans:
+1. SSH server running on target
+2. Valid credentials (key or password)
+3. Network connectivity
+4. User permissions to execute commands
 
 ```json
 {
@@ -189,20 +219,9 @@ This fingerprint report feeds into the vulnerability scanner:
 
 ## Troubleshooting
 
-**Issue**: Command timeouts  
-**Solution**: Increase timeout in config or check system performance
-
 **Issue**: SSH connection failed  
 **Solution**: Verify credentials, SSH key permissions (600), firewall rules
 
 **Issue**: Software not detected  
 **Solution**: Check if command is in config.py, ensure software is installed
 
-## Future Enhancements
-
-- [ ] Remote scanning implementation
-- [ ] Custom software detection rules
-- [ ] Database export options
-- [ ] Scheduled scanning
-- [ ] Comparison between scans (delta reporting)
-- [ ] Performance optimizations for large environments

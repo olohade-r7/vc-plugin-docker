@@ -1,15 +1,9 @@
-"""
-Main execution script for Fingerprinting Agent
-Entry point for running the fingerprinting process
-"""
-
 import sys
 import argparse
 from fingerprinting_agent import FingerprintingAgent
 
 
 def main():
-    """Main execution function"""
     
     parser = argparse.ArgumentParser(
         description="System & Software Fingerprinting Agent",
@@ -69,19 +63,14 @@ Examples:
     args = parser.parse_args()
     
     try:
-        # Create agent
         if args.local:
             print("\n[*] Initializing local fingerprinting agent...")
             agent = FingerprintingAgent(scan_type="local", target_host="localhost")
-            
-            # Run local scan
             agent.scan_local()
             
-        else:  # Remote
+        else:
             print(f"\n[*] Initializing remote fingerprinting agent...")
             agent = FingerprintingAgent(scan_type="remote", target_host=args.remote)
-            
-            # Run remote scan
             agent.scan_remote(
                 hostname=args.remote,
                 username=args.user,
@@ -90,10 +79,7 @@ Examples:
                 key_file=args.key
             )
         
-        # Export report
         agent.export_report(args.output)
-        
-        # Print summary
         agent.print_report_summary()
         
         print("[✓] Fingerprinting complete!")
