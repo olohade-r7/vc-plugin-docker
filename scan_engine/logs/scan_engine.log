@@ -1,0 +1,199 @@
+[2026-01-16 15:07:41] INFO - ==================================================
+[2026-01-16 15:07:41] INFO - VULNERABILITY SCAN STARTED
+[2026-01-16 15:07:41] INFO - ==================================================
+[2026-01-16 15:07:41] INFO - Loading VCK rules from: /Users/olohade/miniProject/scrapper/web_scraper/Content
+[2026-01-16 15:07:41] INFO - Found 10 XML files
+[2026-01-16 15:07:41] DEBUG - Created generic Docker rule: CVE-2025-23266
+[2026-01-16 15:07:41] DEBUG - Loaded rule: CVE-2025-10657 for Docker Desktop
+[2026-01-16 15:07:41] DEBUG - Loaded rule: CVE-2025-3224 for Docker Desktop
+[2026-01-16 15:07:41] DEBUG - Loaded rule: CVE-2025-6587 for Docker Desktop
+[2026-01-16 15:07:41] DEBUG - Created generic Docker rule: CVE-2021-44228
+[2026-01-16 15:07:41] DEBUG - Created generic Docker rule: CVE-2022-42889
+[2026-01-16 15:07:41] DEBUG - Loaded rule: CVE-2025-9074 for Docker Desktop
+[2026-01-16 15:07:41] DEBUG - Loaded rule: CVE-2025-13743 for Docker Desktop
+[2026-01-16 15:07:41] DEBUG - Loaded rule: CVE-2024-8695 for Docker Desktop
+[2026-01-16 15:07:41] DEBUG - Loaded rule: CVE-2025-9164 for Docker Desktop
+[2026-01-16 15:07:41] INFO - Total rules loaded: 10
+[2026-01-16 15:07:41] DEBUG - Loading fingerprint from: /Users/olohade/miniProject/scrapper/fingerprinting_agent/output/fingerprint_report.json
+[2026-01-16 15:07:41] INFO - Found 7 software items in fingerprint
+[2026-01-16 15:07:41] INFO - Checking 7 software items against 10 rules
+[2026-01-16 15:07:41] DEBUG - Checking: VS Code v1.108.0
+[2026-01-16 15:07:41] DEBUG - Checking: Docker v29.1.3
+[2026-01-16 15:07:41] DEBUG -   Product match found: CVE-2025-23266 (Docker)
+[2026-01-16 15:07:41] WARNING - VULNERABLE: Docker 29.1.3 < 99.99.99 - CVE-2025-23266
+[2026-01-16 15:07:41] DEBUG - Checking: Chrome v144.0.7559
+[2026-01-16 15:07:41] DEBUG - Checking: Slack v4.47.72
+[2026-01-16 15:07:41] DEBUG - Checking: Git vGit-155)
+[2026-01-16 15:07:41] DEBUG - Checking: Node.js v25.2.1
+[2026-01-16 15:07:41] DEBUG - Checking: Python v3.9.6
+[2026-01-16 15:07:41] INFO - ==================================================
+[2026-01-16 15:07:41] INFO - SCAN COMPLETED
+[2026-01-16 15:07:41] INFO - Total scanned: 7
+[2026-01-16 15:07:41] INFO - Vulnerable: 1
+[2026-01-16 15:07:41] INFO - Secure: 6
+[2026-01-16 15:07:41] INFO - ==================================================
+[2026-01-16 15:07:41] INFO - Report saved to: /Users/olohade/miniProject/scrapper/scan_engine/output/scan_results.json
+[2026-01-16 15:07:45] INFO - ==================================================
+[2026-01-16 15:07:45] INFO - VULNERABILITY SCAN STARTED
+[2026-01-16 15:07:45] INFO - ==================================================
+[2026-01-16 15:07:45] INFO - Loading VCK rules from: /Users/olohade/miniProject/scrapper/web_scraper/Content
+[2026-01-16 15:07:45] INFO - Found 10 XML files
+[2026-01-16 15:07:45] DEBUG - Created generic Docker rule: CVE-2025-23266
+[2026-01-16 15:07:45] DEBUG - Loaded rule: CVE-2025-10657 for Docker Desktop
+[2026-01-16 15:07:45] DEBUG - Loaded rule: CVE-2025-3224 for Docker Desktop
+[2026-01-16 15:07:45] DEBUG - Loaded rule: CVE-2025-6587 for Docker Desktop
+[2026-01-16 15:07:45] DEBUG - Created generic Docker rule: CVE-2021-44228
+[2026-01-16 15:07:45] DEBUG - Created generic Docker rule: CVE-2022-42889
+[2026-01-16 15:07:45] DEBUG - Loaded rule: CVE-2025-9074 for Docker Desktop
+[2026-01-16 15:07:45] DEBUG - Loaded rule: CVE-2025-13743 for Docker Desktop
+[2026-01-16 15:07:45] DEBUG - Loaded rule: CVE-2024-8695 for Docker Desktop
+[2026-01-16 15:07:45] DEBUG - Loaded rule: CVE-2025-9164 for Docker Desktop
+[2026-01-16 15:07:45] INFO - Total rules loaded: 10
+[2026-01-16 15:07:45] DEBUG - Loading fingerprint from: /Users/olohade/miniProject/scrapper/fingerprinting_agent/output/fingerprint_report.json
+[2026-01-16 15:07:45] INFO - Found 7 software items in fingerprint
+[2026-01-16 15:07:45] INFO - Checking 7 software items against 10 rules
+[2026-01-16 15:07:45] DEBUG - Checking: VS Code v1.108.0
+[2026-01-16 15:07:45] DEBUG - Checking: Docker v29.1.3
+[2026-01-16 15:07:45] DEBUG -   Product match found: CVE-2025-23266 (Docker)
+[2026-01-16 15:07:45] WARNING - VULNERABLE: Docker 29.1.3 < 99.99.99 - CVE-2025-23266
+[2026-01-16 15:07:45] DEBUG - Checking: Chrome v144.0.7559
+[2026-01-16 15:07:45] DEBUG - Checking: Slack v4.47.72
+[2026-01-16 15:07:45] DEBUG - Checking: Git vGit-155)
+[2026-01-16 15:07:45] DEBUG - Checking: Node.js v25.2.1
+[2026-01-16 15:07:45] DEBUG - Checking: Python v3.9.6
+[2026-01-16 15:07:45] INFO - ==================================================
+[2026-01-16 15:07:45] INFO - SCAN COMPLETED
+[2026-01-16 15:07:45] INFO - Total scanned: 7
+[2026-01-16 15:07:45] INFO - Vulnerable: 1
+[2026-01-16 15:07:45] INFO - Secure: 6
+[2026-01-16 15:07:45] INFO - ==================================================
+[2026-01-16 15:07:45] INFO - Report saved to: /Users/olohade/miniProject/scrapper/scan_engine/output/scan_results.json
+[2026-01-16 15:09:25] INFO - ==================================================
+[2026-01-16 15:09:25] INFO - VULNERABILITY SCAN STARTED
+[2026-01-16 15:09:25] INFO - ==================================================
+[2026-01-16 15:09:25] INFO - Loading VCK rules from: /Users/olohade/miniProject/scrapper/scan_engine/Content/synthetic_data
+[2026-01-16 15:09:25] INFO - Found 7 XML files
+[2026-01-16 15:09:25] DEBUG - Loaded rule: CVE-2025-99003 for Chrome
+[2026-01-16 15:09:25] DEBUG - Loaded rule: CVE-2025-99003 for Google Chrome
+[2026-01-16 15:09:25] DEBUG - Loaded rule: CVE-2025-99002 for Docker
+[2026-01-16 15:09:25] DEBUG - Loaded rule: CVE-2025-99002 for Docker Desktop
+[2026-01-16 15:09:25] DEBUG - Loaded rule: CVE-2025-99007 for Git
+[2026-01-16 15:09:25] DEBUG - Loaded rule: CVE-2025-99001 for VS Code
+[2026-01-16 15:09:25] DEBUG - Loaded rule: CVE-2025-99001 for Visual Studio Code
+[2026-01-16 15:09:25] DEBUG - Loaded rule: CVE-2025-99006 for Slack
+[2026-01-16 15:09:25] DEBUG - Loaded rule: CVE-2025-99005 for Python
+[2026-01-16 15:09:25] DEBUG - Loaded rule: CVE-2025-99004 for Node.js
+[2026-01-16 15:09:25] INFO - Total rules loaded: 10
+[2026-01-16 15:09:25] DEBUG - Loading fingerprint from: /Users/olohade/miniProject/scrapper/fingerprinting_agent/output/fingerprint_report.json
+[2026-01-16 15:09:25] INFO - Found 7 software items in fingerprint
+[2026-01-16 15:09:25] INFO - Checking 7 software items against 10 rules
+[2026-01-16 15:09:25] DEBUG - Checking: VS Code v1.108.0
+[2026-01-16 15:09:25] DEBUG -   Product match found: CVE-2025-99001 (VS Code)
+[2026-01-16 15:09:25] WARNING - VULNERABLE: VS Code 1.108.0 < 1.110.0 - CVE-2025-99001
+[2026-01-16 15:09:25] DEBUG - Checking: Docker v29.1.3
+[2026-01-16 15:09:25] DEBUG -   Product match found: CVE-2025-99002 (Docker)
+[2026-01-16 15:09:25] WARNING - VULNERABLE: Docker 29.1.3 < 30.0.0 - CVE-2025-99002
+[2026-01-16 15:09:25] DEBUG - Checking: Chrome v144.0.7559
+[2026-01-16 15:09:25] DEBUG -   Product match found: CVE-2025-99003 (Chrome)
+[2026-01-16 15:09:25] WARNING - VULNERABLE: Chrome 144.0.7559 < 145.0.0.0 - CVE-2025-99003
+[2026-01-16 15:09:25] DEBUG - Checking: Slack v4.47.72
+[2026-01-16 15:09:25] DEBUG -   Product match found: CVE-2025-99006 (Slack)
+[2026-01-16 15:09:25] WARNING - VULNERABLE: Slack 4.47.72 < 4.48.0 - CVE-2025-99006
+[2026-01-16 15:09:25] DEBUG - Checking: Git vGit-155)
+[2026-01-16 15:09:25] DEBUG -   Product match found: CVE-2025-99007 (Git)
+[2026-01-16 15:09:25] INFO - SAFE: Git Git-155) does not match condition < 2.45.0
+[2026-01-16 15:09:25] DEBUG - Checking: Node.js v25.2.1
+[2026-01-16 15:09:25] DEBUG -   Product match found: CVE-2025-99004 (Node.js)
+[2026-01-16 15:09:25] WARNING - VULNERABLE: Node.js 25.2.1 < 26.0.0 - CVE-2025-99004
+[2026-01-16 15:09:25] DEBUG - Checking: Python v3.9.6
+[2026-01-16 15:09:25] DEBUG -   Product match found: CVE-2025-99005 (Python)
+[2026-01-16 15:09:25] WARNING - VULNERABLE: Python 3.9.6 < 3.10.0 - CVE-2025-99005
+[2026-01-16 15:09:25] INFO - ==================================================
+[2026-01-16 15:09:25] INFO - SCAN COMPLETED
+[2026-01-16 15:09:25] INFO - Total scanned: 7
+[2026-01-16 15:09:25] INFO - Vulnerable: 6
+[2026-01-16 15:09:25] INFO - Secure: 1
+[2026-01-16 15:09:25] INFO - ==================================================
+[2026-01-16 15:09:25] INFO - Report saved to: /Users/olohade/miniProject/scrapper/scan_engine/output/scan_results.json
+[2026-01-16 15:20:32] INFO - ==================================================
+[2026-01-16 15:20:32] INFO - VULNERABILITY SCAN STARTED
+[2026-01-16 15:20:32] INFO - ==================================================
+[2026-01-16 15:20:32] INFO - Loading VCK rules from: /Users/olohade/miniProject/scrapper/web_scraper/Content
+[2026-01-16 15:20:32] INFO - Found 10 XML files
+[2026-01-16 15:20:32] DEBUG - Created generic Docker rule: CVE-2025-23266
+[2026-01-16 15:20:32] DEBUG - Loaded rule: CVE-2025-10657 for Docker Desktop
+[2026-01-16 15:20:32] DEBUG - Loaded rule: CVE-2025-3224 for Docker Desktop
+[2026-01-16 15:20:32] DEBUG - Loaded rule: CVE-2025-6587 for Docker Desktop
+[2026-01-16 15:20:32] DEBUG - Created generic Docker rule: CVE-2021-44228
+[2026-01-16 15:20:32] DEBUG - Created generic Docker rule: CVE-2022-42889
+[2026-01-16 15:20:32] DEBUG - Loaded rule: CVE-2025-9074 for Docker Desktop
+[2026-01-16 15:20:32] DEBUG - Loaded rule: CVE-2025-13743 for Docker Desktop
+[2026-01-16 15:20:32] DEBUG - Loaded rule: CVE-2024-8695 for Docker Desktop
+[2026-01-16 15:20:32] DEBUG - Loaded rule: CVE-2025-9164 for Docker Desktop
+[2026-01-16 15:20:32] INFO - Total rules loaded: 10
+[2026-01-16 15:20:32] DEBUG - Loading fingerprint from: /Users/olohade/miniProject/scrapper/fingerprinting_agent/output/fingerprint_report.json
+[2026-01-16 15:20:32] INFO - Found 7 software items in fingerprint
+[2026-01-16 15:20:32] INFO - Checking 7 software items against 10 rules
+[2026-01-16 15:20:32] DEBUG - Checking: VS Code v1.108.0
+[2026-01-16 15:20:32] DEBUG - Checking: Docker v29.1.3
+[2026-01-16 15:20:32] DEBUG -   Product match found: CVE-2025-23266 (Docker)
+[2026-01-16 15:20:32] WARNING - VULNERABLE: Docker 29.1.3 < 99.99.99 - CVE-2025-23266
+[2026-01-16 15:20:32] DEBUG - Checking: Chrome v144.0.7559
+[2026-01-16 15:20:32] DEBUG - Checking: Slack v4.47.72
+[2026-01-16 15:20:32] DEBUG - Checking: Git vGit-155)
+[2026-01-16 15:20:32] DEBUG - Checking: Node.js v25.2.1
+[2026-01-16 15:20:32] DEBUG - Checking: Python v3.9.6
+[2026-01-16 15:20:32] INFO - ==================================================
+[2026-01-16 15:20:32] INFO - SCAN COMPLETED
+[2026-01-16 15:20:32] INFO - Total scanned: 7
+[2026-01-16 15:20:32] INFO - Vulnerable: 1
+[2026-01-16 15:20:32] INFO - Secure: 6
+[2026-01-16 15:20:32] INFO - ==================================================
+[2026-01-16 15:20:32] INFO - Report saved to: /Users/olohade/miniProject/scrapper/scan_engine/output/scan_results.json
+[2026-01-16 15:23:26] INFO - ==================================================
+[2026-01-16 15:23:26] INFO - VULNERABILITY SCAN STARTED
+[2026-01-16 15:23:26] INFO - ==================================================
+[2026-01-16 15:23:26] INFO - Loading VCK rules from: /Users/olohade/miniProject/scrapper/scan_engine/Content/synthetic_data
+[2026-01-16 15:23:26] INFO - Found 7 XML files
+[2026-01-16 15:23:26] DEBUG - Loaded rule: CVE-2025-99003 for Chrome
+[2026-01-16 15:23:26] DEBUG - Loaded rule: CVE-2025-99003 for Google Chrome
+[2026-01-16 15:23:26] DEBUG - Loaded rule: CVE-2025-99002 for Docker
+[2026-01-16 15:23:26] DEBUG - Loaded rule: CVE-2025-99002 for Docker Desktop
+[2026-01-16 15:23:26] DEBUG - Loaded rule: CVE-2025-99007 for Git
+[2026-01-16 15:23:26] DEBUG - Loaded rule: CVE-2025-99001 for VS Code
+[2026-01-16 15:23:26] DEBUG - Loaded rule: CVE-2025-99001 for Visual Studio Code
+[2026-01-16 15:23:26] DEBUG - Loaded rule: CVE-2025-99006 for Slack
+[2026-01-16 15:23:26] DEBUG - Loaded rule: CVE-2025-99005 for Python
+[2026-01-16 15:23:26] DEBUG - Loaded rule: CVE-2025-99004 for Node.js
+[2026-01-16 15:23:26] INFO - Total rules loaded: 10
+[2026-01-16 15:23:26] DEBUG - Loading fingerprint from: /Users/olohade/miniProject/scrapper/fingerprinting_agent/output/fingerprint_report.json
+[2026-01-16 15:23:26] INFO - Found 7 software items in fingerprint
+[2026-01-16 15:23:26] INFO - Checking 7 software items against 10 rules
+[2026-01-16 15:23:26] DEBUG - Checking: VS Code v1.108.0
+[2026-01-16 15:23:26] DEBUG -   Product match found: CVE-2025-99001 (VS Code)
+[2026-01-16 15:23:27] WARNING - VULNERABLE: VS Code 1.108.0 < 1.110.0 - CVE-2025-99001
+[2026-01-16 15:23:27] DEBUG - Checking: Docker v29.1.3
+[2026-01-16 15:23:27] DEBUG -   Product match found: CVE-2025-99002 (Docker)
+[2026-01-16 15:23:27] WARNING - VULNERABLE: Docker 29.1.3 < 30.0.0 - CVE-2025-99002
+[2026-01-16 15:23:27] DEBUG - Checking: Chrome v144.0.7559
+[2026-01-16 15:23:27] DEBUG -   Product match found: CVE-2025-99003 (Chrome)
+[2026-01-16 15:23:27] WARNING - VULNERABLE: Chrome 144.0.7559 < 145.0.0.0 - CVE-2025-99003
+[2026-01-16 15:23:27] DEBUG - Checking: Slack v4.47.72
+[2026-01-16 15:23:27] DEBUG -   Product match found: CVE-2025-99006 (Slack)
+[2026-01-16 15:23:27] WARNING - VULNERABLE: Slack 4.47.72 < 4.48.0 - CVE-2025-99006
+[2026-01-16 15:23:27] DEBUG - Checking: Git vGit-155)
+[2026-01-16 15:23:27] DEBUG -   Product match found: CVE-2025-99007 (Git)
+[2026-01-16 15:23:27] INFO - SAFE: Git Git-155) does not match condition < 2.45.0
+[2026-01-16 15:23:27] DEBUG - Checking: Node.js v25.2.1
+[2026-01-16 15:23:27] DEBUG -   Product match found: CVE-2025-99004 (Node.js)
+[2026-01-16 15:23:27] WARNING - VULNERABLE: Node.js 25.2.1 < 26.0.0 - CVE-2025-99004
+[2026-01-16 15:23:27] DEBUG - Checking: Python v3.9.6
+[2026-01-16 15:23:27] DEBUG -   Product match found: CVE-2025-99005 (Python)
+[2026-01-16 15:23:27] WARNING - VULNERABLE: Python 3.9.6 < 3.10.0 - CVE-2025-99005
+[2026-01-16 15:23:27] INFO - ==================================================
+[2026-01-16 15:23:27] INFO - SCAN COMPLETED
+[2026-01-16 15:23:27] INFO - Total scanned: 7
+[2026-01-16 15:23:27] INFO - Vulnerable: 6
+[2026-01-16 15:23:27] INFO - Secure: 1
+[2026-01-16 15:23:27] INFO - ==================================================
+[2026-01-16 15:23:27] INFO - Report saved to: /Users/olohade/miniProject/scrapper/scan_engine/output/scan_results.json
