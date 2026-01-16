@@ -1,6 +1,6 @@
 {
   "agent_metadata": {
-    "timestamp": "2026-01-15T14:06:44.843144Z",
+    "timestamp": "2026-01-16T09:57:32.372845Z",
     "scan_type": "local",
     "target_host": "localhost",
     "agent_version": "1.0.0"
@@ -23,7 +23,7 @@
       "evidence": {
         "command_run": "mdfind \"kMDItemCFBundleIdentifier == 'com.microsoft.VSCode'\" 2>/dev/null | head -1",
         "raw_output": "/Applications/Visual Studio Code.app",
-        "execution_timestamp": "2026-01-15T14:06:43.550577Z"
+        "execution_timestamp": "2026-01-16T09:57:31.300714Z"
       }
     },
     {
@@ -36,12 +36,12 @@
       "evidence": {
         "command_run": "which docker 2>/dev/null",
         "raw_output": "/usr/local/bin/docker",
-        "execution_timestamp": "2026-01-15T14:06:43.716343Z"
+        "execution_timestamp": "2026-01-16T09:57:31.459349Z"
       }
     },
     {
       "productName": "Chrome",
-      "versionNumber": "143.0.7499",
+      "versionNumber": "144.0.7559",
       "architecture": "unknown",
       "productFamily": "Browser",
       "vendor": "Google",
@@ -49,7 +49,7 @@
       "evidence": {
         "command_run": "mdfind \"kMDItemCFBundleIdentifier == 'com.google.Chrome'\" 2>/dev/null | head -1",
         "raw_output": "/Applications/Google Chrome.app",
-        "execution_timestamp": "2026-01-15T14:06:44.085062Z"
+        "execution_timestamp": "2026-01-16T09:57:31.825415Z"
       }
     },
     {
@@ -62,7 +62,7 @@
       "evidence": {
         "command_run": "mdfind \"kMDItemCFBundleIdentifier == 'com.tinyspeck.slackmacgap'\" 2>/dev/null | head -1",
         "raw_output": "/Applications/Slack.app",
-        "execution_timestamp": "2026-01-15T14:06:44.438289Z"
+        "execution_timestamp": "2026-01-16T09:57:31.970647Z"
       }
     },
     {
@@ -75,7 +75,7 @@
       "evidence": {
         "command_run": "which git 2>/dev/null",
         "raw_output": "/usr/bin/git",
-        "execution_timestamp": "2026-01-15T14:06:44.466576Z"
+        "execution_timestamp": "2026-01-16T09:57:31.997242Z"
       }
     },
     {
@@ -88,7 +88,7 @@
       "evidence": {
         "command_run": "which node 2>/dev/null",
         "raw_output": "/usr/local/bin/node",
-        "execution_timestamp": "2026-01-15T14:06:44.495995Z"
+        "execution_timestamp": "2026-01-16T09:57:32.025644Z"
       }
     },
     {
@@ -101,7 +101,7 @@
       "evidence": {
         "command_run": "which python3 2>/dev/null",
         "raw_output": "/Users/olohade/miniProject/scrapper/venv/bin/python3",
-        "execution_timestamp": "2026-01-15T14:06:44.817086Z"
+        "execution_timestamp": "2026-01-16T09:57:32.349736Z"
       }
     }
   ],
@@ -109,6 +109,7 @@
   "summary": {
     "total_software_detected": 7,
     "scan_type": "local",
+    "discovery_mode": false,
     "execution_status": "success"
   }
 }

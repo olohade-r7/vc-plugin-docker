@@ -142,6 +142,56 @@ TARGET_SOFTWARE = {
     }
 }
 
+# =============================================================================
+# AUTO-DISCOVERY CONFIGURATION
+# =============================================================================
+# Commands to discover ALL installed software on the system
+# This is optional - used when --discover flag is passed
+
+AUTO_DISCOVERY_CONFIG = {
+    "enabled": False,  # Set to True to enable auto-discovery by default
+    "macOS": {
+        # List all GUI applications
+        "list_apps": "ls /Applications/*.app 2>/dev/null | xargs -n1 basename 2>/dev/null | sed 's/.app$//'",
+        # List all homebrew packages
+        "list_brew": "brew list --versions 2>/dev/null",
+        # List all command-line tools with versions
+        "list_cli": """
+            for cmd in docker git node npm python3 ruby java go rust cargo pip3 aws kubectl terraform ansible; do
+                if which $cmd >/dev/null 2>&1; then
+                    version=$($cmd --version 2>&1 | head -1)
+                    echo "$cmd|$version"
+                fi
+            done
+        """,
+    },
+    "Linux": {
+        # List installed packages (Debian/Ubuntu)
+        "list_apt": "dpkg -l 2>/dev/null | grep '^ii' | awk '{print $2\"|\"$3}'",
+        # List installed packages (RHEL/CentOS/Fedora)
+        "list_rpm": "rpm -qa --qf '%{NAME}|%{VERSION}\\n' 2>/dev/null",
+        # List snap packages
+        "list_snap": "snap list 2>/dev/null | tail -n +2 | awk '{print $1\"|\"$2}'",
+        # List flatpak packages
+        "list_flatpak": "flatpak list --app 2>/dev/null | awk -F'\\t' '{print $1\"|\"$2}'",
+        # List common CLI tools
+        "list_cli": """
+            for cmd in docker git node npm python3 ruby java go rust cargo pip3 aws kubectl terraform ansible; do
+                if which $cmd >/dev/null 2>&1; then
+                    version=$($cmd --version 2>&1 | head -1)
+                    echo "$cmd|$version"
+                fi
+            done
+        """,
+    },
+    "Windows": {
+        # List installed programs from registry
+        "list_programs": "wmic product get name,version /format:csv 2>nul",
+        # List from PowerShell
+        "list_powershell": "powershell \"Get-ItemProperty HKLM:\\Software\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\* | Select-Object DisplayName, DisplayVersion | Format-Table -HideTableHeaders\"",
+    }
+}
+
 # System info detection commands (platform-specific)
 SYSTEM_INFO_COMMANDS = {
     "macOS": {

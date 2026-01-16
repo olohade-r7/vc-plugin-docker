@@ -1,39 +1,44 @@
 # Fingerprinting Agent - System & Software Scanner
 
-System fingerprinting tool for detecting OS details and installed software on local and remote machines via SSH.
+Automated tool for detecting operating system details and installed software on local and remote machines.
 
-## 🎯 Purpose
+---
 
-Identifies system specifications, installed software versions, and configurations to support vulnerability assessment and inventory management.
+## What is System Fingerprinting?
 
-## 🏗 Architecture
+**Fingerprinting** is the process of identifying and cataloging system characteristics:
+- Operating system type and version
+- Installed software and their versions
+- System hardware details
+
+### Why Fingerprint Systems?
+
+To assess vulnerabilities, you must first know **what software is installed**. A vulnerability in Docker v29.0 doesn't matter if Docker isn't installed, or if you have v30.0 (patched).
+
+Fingerprinting creates a **software inventory** that the Scan Engine uses to check against known CVEs.
+
+---
+
+## How It Works
 
 ```
-SSH Connector       → Remote authentication
-    ↓
-Evidence Collector  → Execute commands
-    ↓
-System Detector     → OS, kernel, CPU info
-    ↓
-Software Fingerprinter → Detect installed apps
-    ↓
-JSON Report         → Structured output
+┌──────────────────┐     ┌──────────────────┐     ┌──────────────────┐
+│  Target System   │     │  Run Detection   │     │   Generate       │
+│  (Local/Remote)  │────▶│   Commands       │────▶│   JSON Report    │
+│                  │     │  (via SSH/local) │     │                  │
+└──────────────────┘     └──────────────────┘     └──────────────────┘
 ```
 
-## 📦 Components
+**Process:**
+1. Connect to target (local subprocess or remote SSH)
+2. Detect OS type (macOS, Linux, Windows)
+3. Run OS-specific commands to find software
+4. Parse version numbers from command output
+5. Generate structured JSON report
 
-| Component | Purpose |
-|-----------|---------|
-| `main.py` | CLI entry point |
-| `fingerprinting_agent.py` | Orchestrator |
-| `models.py` | Pydantic data models |
-| `config.py` | Software detection configs |
-| `modules/ssh_connector.py` | Remote SSH connections |
-| `modules/evidence_collector.py` | Command execution |
-| `modules/system_info.py` | OS/system detection |
-| `modules/software_fingerprinter.py` | Software detection |
+---
 
-## 🚀 Usage
+## Usage
 
 ### Local Scan
 ```bash
@@ -48,180 +53,216 @@ python main.py --remote 192.168.1.100 --user admin --key ~/.ssh/id_rsa
 
 ### Remote Scan (Password)
 ```bash
-python main.py --remote 192.168.1.100 --user admin --password mypass
+python main.py --remote 192.168.1.100 --user admin --password mypassword
 ```
 
-### Custom Output
+### All Options
 ```bash
-python main.py --local --output custom_report.json
+python main.py --help
+
+Options:
+  --local              Scan local machine
+  --remote HOSTNAME    Scan remote machine via SSH
+  --user USERNAME      SSH username (default: root)
+  --password PASSWORD  SSH password
+  --key KEYFILE        SSH private key path
+  --port PORT          SSH port (default: 22)
+  --output PATH        Output file path
 ```
 
-## 📤 Output
+---
 
-`output/fingerprint_report.json`:
+## Output Format
 
+**fingerprint_report.json:**
 ```json
 {
   "agent_metadata": {
-    "scan_type": "local",
-    "target_host": "localhost",
-    "timestamp": "2026-01-15T10:30:00Z"
-  },
-  "system_info": {
-    "os": "macOS",
-    "version": "14.2.1",
-    "kernel": "23.3.0",
-    "cpu": "Apple M1",
-    "hostname": "MacBook-Pro.local"
-  },
-  "software_inventory": [
-    {
-      "name": "Docker",
-      "version": "24.0.6",
-      "path": "/usr/local/bin/docker",
-      "architecture": "arm64",
-      "detection_evidence": "..."
-    }
-  ],
-  "summary": {
-    "total_software_detected": 12,
-    "execution_status": "success"
-  }
-}
-```
-
-## 🔧 Configuration
-
-Edit [config.py](config.py) to add/modify software detection:
-
-```python
-TARGET_SOFTWARE = {
-    "Docker": {
-        "macos": ["docker --version"],
-        "linux": ["docker --version", "which docker"]
-    }
-}
-```
-
-## 📊 Detection Features
-
-- **System Information**: OS, version, kernel, CPU, hostname
-- **Software Detection**: Version, path, architecture
-- **Evidence Tracking**: Commands, outputs, return codes
-- **Multi-platform**: macOS, Linux, Windows support
-- **Remote Scanning**: SSH key and password auth
-
-## 🛠 Dependencies
-
-```
-paramiko>=3.0.0
-pydantic>=2.0.0
-```
-
-Install: `pip install -r requirements.txt`
-
-## 🔐 SSH Requirements
-
-For remote scans:
-1. SSH server running on target
-2. Valid credentials (key or password)
-3. Network connectivity
-4. User permissions to execute commands
-
-```json
-{
-  "agent_metadata": {
-    "timestamp": "2026-01-15T10:00:00Z",
+    "timestamp": "2026-01-16T10:00:00Z",
     "scan_type": "local",
     "target_host": "localhost"
   },
   "system_info": {
     "os": "macOS",
-    "version": "14.2.1",
-    "kernel": "23.2.0",
-    "cpu": "Apple M2",
-    "hostname": "MacBook-Pro"
+    "version": "26.2",
+    "kernel": "25.2.0",
+    "cpu": "Apple M4 Pro",
+    "hostname": "my-laptop"
   },
   "software_inventory": [
     {
-      "productName": "Python",
-      "versionNumber": "3.11.0",
-      "architecture": "arm64",
-      "productFamily": "Runtime",
-      "vendor": "Python Software Foundation",
-      "installPath": "/usr/local/bin/python3",
-      "evidence": {
-        "command_run": "which python3",
-        "raw_output": "/usr/local/bin/python3"
-      }
+      "productName": "Docker",
+      "versionNumber": "29.1.3",
+      "vendor": "Docker Inc.",
+      "productFamily": "Virtualization",
+      "installPath": "/usr/local/bin/docker"
+    },
+    {
+      "productName": "Chrome",
+      "versionNumber": "144.0.7559",
+      "vendor": "Google",
+      "productFamily": "Browser",
+      "installPath": "/Applications/Google Chrome.app"
     }
-  ],
-  "summary": {
-    "total_software_detected": 8,
-    "scan_type": "local",
-    "execution_status": "success"
-  }
+  ]
 }
 ```
 
-## Data Integrity
+---
 
-Every piece of data includes:
-- **Command Executed**: Exact shell command used
-- **Raw Output**: Unmodified system output
-- **Execution Timestamp**: When the command ran
-- **Return Code**: Success/failure indicator
+## Project Structure
 
-This ensures findings can be verified and audited.
+```
+fingerprinting_agent/
+├── main.py                    # CLI entry point
+├── fingerprinting_agent.py    # Main orchestrator
+├── config.py                  # Software detection rules
+├── models.py                  # Pydantic data models
+│
+├── modules/
+│   ├── ssh_connector.py       # SSH connection handling
+│   ├── evidence_collector.py  # Command execution
+│   ├── system_info.py         # OS/CPU detection
+│   └── software_fingerprinter.py  # Software detection
+│
+└── output/
+    └── fingerprint_report.json
+```
 
-## Supported Platforms
+---
 
-- **macOS** (all commands optimized)
-- **Linux** (Ubuntu, Debian, RHEL, etc.)
-- **Windows** (CMD/PowerShell commands)
+## Software Detection
 
-## Supported Software
+### How Software is Detected
 
-Currently fingerprints:
-- PyCharm (JetBrains)
-- VS Code (Microsoft)
-- Docker (Docker Inc.)
-- Chrome (Google)
-- Slack (Slack Technologies)
-- Git (Git Project)
-- Node.js (OpenJS Foundation)
-- Python (Python Software Foundation)
-
-## Adding New Software
-
-Edit `config.py` and add to `TARGET_SOFTWARE`:
+Each software has OS-specific detection commands defined in `config.py`:
 
 ```python
-"Software Name": {
-    "vendor": "Vendor Name",
-    "productFamily": "Category",
+"Docker": {
+    "vendor": "Docker Inc.",
+    "productFamily": "Virtualization",
     "macOS": {
-        "detection_command": "command to find it",
-        "version_command": "command to get version"
+        "detection_command": "which docker 2>/dev/null",
+        "version_command": "docker --version 2>/dev/null"
     },
-    "Linux": { ... },
-    "Windows": { ... }
+    "Linux": {
+        "detection_command": "which docker 2>/dev/null",
+        "version_command": "docker --version 2>/dev/null"
+    }
 }
 ```
 
-## Integration with Vulnerability Scanner
+**Logic:**
+1. Run `detection_command` - if output exists, software is installed
+2. Run `version_command` - parse version from output
+3. Record install path, vendor, family
 
-This fingerprint report feeds into the vulnerability scanner:
+### Currently Detected Software
 
-1. **Fingerprinter** → `fingerprint_report.json` (What's installed?)
-2. **Scanner** → Compares with `all_vulnerabilities.json` (What vulnerabilities?)
-3. **Reporter** → Generates alerts (What needs to be fixed?)
+| Software | Detection Method |
+|----------|------------------|
+| VS Code | Bundle identifier (macOS), `which code` (Linux) |
+| Docker | `which docker` |
+| Chrome | Bundle identifier (macOS), `which google-chrome` (Linux) |
+| Slack | Bundle identifier (macOS) |
+| Git | `which git` |
+| Node.js | `which node` |
+| Python | `which python3` |
+| PyCharm | Bundle identifier (macOS) |
+
+### Adding New Software
+
+Edit `config.py`:
+```python
+TARGET_SOFTWARE = {
+    "NewSoftware": {
+        "vendor": "Vendor Name",
+        "productFamily": "Category",
+        "macOS": {
+            "detection_command": "command to check if installed",
+            "version_command": "command to get version"
+        },
+        "Linux": {
+            "detection_command": "...",
+            "version_command": "..."
+        }
+    }
+}
+```
+
+---
+
+## SSH Remote Scanning
+
+### Prerequisites for Remote Scan
+
+**On the target machine:**
+1. SSH server must be running
+2. You need valid credentials (password or key)
+3. Network connectivity to the target
+
+**For Linux targets:**
+```bash
+# Install SSH server
+sudo apt install openssh-server
+sudo systemctl start ssh
+```
+
+### How SSH Scanning Works
+
+```
+Your Machine                    Remote Machine
+     │                               │
+     │──── SSH Connect ─────────────▶│
+     │                               │
+     │◀─── Auth Success ─────────────│
+     │                               │
+     │──── uname -s ────────────────▶│  (detect OS)
+     │◀─── "Linux" ──────────────────│
+     │                               │
+     │──── which docker ────────────▶│  (detect software)
+     │◀─── "/usr/bin/docker" ────────│
+     │                               │
+     │──── docker --version ────────▶│  (get version)
+     │◀─── "Docker version 24.0" ────│
+```
+
+---
+
+## Evidence Collection
+
+Every command execution is recorded as **evidence**:
+
+```json
+{
+  "command_run": "docker --version",
+  "raw_output": "Docker version 29.1.3, build abcd123",
+  "execution_timestamp": "2026-01-16T10:00:00Z"
+}
+```
+
+This provides:
+- Audit trail of what was checked
+- Raw data for debugging
+- Proof of findings
+
+---
+
+## Dependencies
+
+| Package | Purpose |
+|---------|---------|
+| `paramiko` | SSH connections for remote scanning |
+| `pydantic` | Data validation for reports |
+
+---
 
 ## Troubleshooting
 
-**Issue**: SSH connection failed  
-**Solution**: Verify credentials, SSH key permissions (600), firewall rules
-
-**Issue**: Software not detected  
-**Solution**: Check if command is in config.py, ensure software is installed
+| Issue | Solution |
+|-------|----------|
+| SSH connection failed | Check credentials, firewall, SSH service |
+| Software not detected | Add detection rules to `config.py` |
+| Version parsing error | Check `version_command` output format |
+| Permission denied | Use sudo or check user permissions |
 

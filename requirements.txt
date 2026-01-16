@@ -1,5 +1,51 @@
-beautifulsoup4==4.12.3
-requests==2.31.0
-pydantic==2.6.1
-lxml==5.1.0
-python-dateutil==2.8.2
+# =============================================================================
+# UNIFIED REQUIREMENTS FOR SECURITY VULNERABILITY MANAGEMENT PIPELINE
+# =============================================================================
+# This single requirements file serves all three projects:
+#   1. Web Scraper       - CVE/vulnerability data collection
+#   2. Fingerprinting    - System software inventory
+#   3. Scan Engine       - Vulnerability assessment & web dashboard
+# =============================================================================
+# Install all: pip install -r requirements.txt
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# WEB SCRAPER DEPENDENCIES
+# Used by: web_scraper/
+# Purpose: Scrape security advisories and generate VCK/XML/SOL files
+# -----------------------------------------------------------------------------
+beautifulsoup4==4.12.3    # HTML parsing for web scraping
+requests==2.31.0          # HTTP requests to fetch web pages
+lxml==5.1.0               # XML/HTML parsing (faster than default parser)
+
+# -----------------------------------------------------------------------------
+# FINGERPRINTING AGENT DEPENDENCIES
+# Used by: fingerprinting_agent/
+# Purpose: Detect installed software on local/remote systems via SSH
+# -----------------------------------------------------------------------------
+paramiko==3.4.0           # SSH library for remote system connections
+# (subprocess is used for local commands - built into Python)
+
+# -----------------------------------------------------------------------------
+# SCAN ENGINE DEPENDENCIES (NEW)
+# Used by: scan_engine/
+# Purpose: Compare fingerprints against VCK files, Flask web dashboard
+# -----------------------------------------------------------------------------
+flask==3.0.0              # Web framework for dashboard
+packaging==23.2           # Robust version comparison (e.g., 2.1.0-beta vs 2.1.0)
+Jinja2==3.1.2             # Template engine (included with Flask, explicit for clarity)
+
+# -----------------------------------------------------------------------------
+# SHARED DEPENDENCIES
+# Used by: All three projects
+# Purpose: Data validation, date handling, structured output
+# -----------------------------------------------------------------------------
+pydantic==2.6.1           # Data validation and models
+python-dateutil==2.8.2    # Date parsing and manipulation
+
+# -----------------------------------------------------------------------------
+# DEVELOPMENT/OPTIONAL
+# Useful for development but not strictly required for production
+# -----------------------------------------------------------------------------
+# pytest==8.0.0           # Testing framework (uncomment if needed)
+# black==24.1.0           # Code formatting (uncomment if needed)
