@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vulnerability Scan Engine</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .logo {
+            font-size: 48px;
+            margin-bottom: 10px;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            color: #a0a0a0;
+            font-size: 1.1rem;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .card h2 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            color: #00d4ff;
+        }
+        
+        .config-grid {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 10px;
+        }
+        
+        .config-label {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+        
+        .config-value {
+            color: #fff;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85rem;
+            word-break: break-all;
+        }
+        
+        .config-value.ok {
+            color: #00ff88;
+        }
+        
+        .config-value.error {
+            color: #ff6b6b;
+        }
+        
+        .scan-section {
+            text-align: center;
+        }
+        
+        .scan-btn {
+            background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%);
+            color: #1a1a2e;
+            border: none;
+            padding: 20px 60px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        .scan-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0, 212, 255, 0.4);
+        }
+        
+        .scan-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .scan-btn:active {
+            transform: translateY(0);
+        }
+        
+        .loading {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 30px;
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(0, 212, 255, 0.2);
+            border-top-color: #00d4ff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        .loading-text {
+            margin-top: 15px;
+            color: #a0a0a0;
+            font-size: 0.95rem;
+        }
+        
+        .status {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 15px;
+            display: none;
+        }
+        
+        .status.success {
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid rgba(0, 255, 136, 0.3);
+            display: block;
+        }
+        
+        .status.error {
+            background: rgba(255, 107, 107, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            display: block;
+        }
+        
+        .status-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+        
+        .status.success .status-icon { color: #00ff88; }
+        .status.error .status-icon { color: #ff6b6b; }
+        
+        .status-message {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+        }
+        
+        .status-details {
+            font-size: 0.9rem;
+            color: #a0a0a0;
+        }
+        
+        .view-results-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: transparent;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .view-results-btn:hover {
+            background: #00d4ff;
+            color: #1a1a2e;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .stat-box {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+        
+        .stat-label {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+        }
+        
+        .stat-box.vulnerable .stat-number { color: #ff6b6b; }
+        .stat-box.secure .stat-number { color: #00ff88; }
+        .stat-box.total .stat-number { color: #00d4ff; }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        footer a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">🛡️</div>
+            <h1>Vulnerability Scan Engine</h1>
+            <p class="subtitle">Security Assessment & Threat Detection System</p>
+        </header>
+        
+        <div class="card">
+            <h2>📋 Current Configuration</h2>
+            <div class="config-grid">
+                <div class="config-label">VCK Source:</div>
+                <div class="config-value">{{ config.vck_source }}</div>
+                
+                <div class="config-label">VCK Path:</div>
+                <div class="config-value">{{ config.vck_path }}</div>
+                
+                <div class="config-label">Fingerprint File:</div>
+                <div class="config-value {% if config.fingerprint_exists %}ok{% else %}error{% endif %}">
+                    {{ config.fingerprint_path }}
+                    {% if config.fingerprint_exists %}✓{% else %}✗ (Not Found){% endif %}
+                </div>
+            </div>
+        </div>
+        
+        <div class="card scan-section">
+            <h2>🔍 Start Vulnerability Scan</h2>
+            <p style="color: #a0a0a0; margin-bottom: 25px;">
+                Scan will compare your system's software inventory against known vulnerabilities.
+            </p>
+            
+            <button class="scan-btn" id="scanBtn" onclick="startScan()">
+                🚀 Start Scan
+            </button>
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <div class="loading-text">Scanning system for vulnerabilities...</div>
+            </div>
+            
+            <div class="status" id="status">
+                <div class="status-icon" id="statusIcon"></div>
+                <div class="status-message" id="statusMessage"></div>
+                <div class="status-details" id="statusDetails"></div>
+                <div class="stats-grid" id="statsGrid" style="display: none;">
+                    <div class="stat-box total">
+                        <div class="stat-number" id="totalCount">0</div>
+                        <div class="stat-label">Total Software</div>
+                    </div>
+                    <div class="stat-box vulnerable">
+                        <div class="stat-number" id="vulnCount">0</div>
+                        <div class="stat-label">Vulnerable</div>
+                    </div>
+                    <div class="stat-box secure">
+                        <div class="stat-number" id="secureCount">0</div>
+                        <div class="stat-label">Secure</div>
+                    </div>
+                </div>
+                <a href="/dashboard" class="view-results-btn" id="viewResultsBtn" style="display: none;">
+                    📊 View Detailed Results →
+                </a>
+            </div>
+        </div>
+        
+        <footer>
+            Security Vulnerability Management Pipeline<br>
+            <a href="/dashboard">Dashboard</a> | 
+            <a href="/api/config">API Config</a> | 
+            <a href="/health">Health Check</a>
+        </footer>
+    </div>
+    
+    <script>
+        async function startScan() {
+            const btn = document.getElementById('scanBtn');
+            const loading = document.getElementById('loading');
+            const status = document.getElementById('status');
+            const statsGrid = document.getElementById('statsGrid');
+            const viewResultsBtn = document.getElementById('viewResultsBtn');
+            
+            // Reset and show loading
+            btn.disabled = true;
+            loading.style.display = 'flex';
+            status.className = 'status';
+            status.style.display = 'none';
+            statsGrid.style.display = 'none';
+            viewResultsBtn.style.display = 'none';
+            
+            try {
+                const response = await fetch('/scan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                const data = await response.json();
+                
+                if (data.status === 'success') {
+                    status.className = 'status success';
+                    document.getElementById('statusIcon').textContent = '✅';
+                    document.getElementById('statusMessage').textContent = 'Scan Completed Successfully!';
+                    document.getElementById('statusDetails').textContent = 
+                        `Scan ID: ${data.scan_id}`;
+                    
+                    // Show stats
+                    if (data.summary) {
+                        document.getElementById('totalCount').textContent = data.summary.total_software;
+                        document.getElementById('vulnCount').textContent = data.summary.vulnerable_count;
+                        document.getElementById('secureCount').textContent = data.summary.secure_count;
+                        statsGrid.style.display = 'grid';
+                    }
+                    
+                    viewResultsBtn.style.display = 'inline-block';
+                } else {
+                    status.className = 'status error';
+                    document.getElementById('statusIcon').textContent = '❌';
+                    document.getElementById('statusMessage').textContent = 'Scan Failed';
+                    document.getElementById('statusDetails').textContent = data.message;
+                }
+                
+            } catch (error) {
+                status.className = 'status error';
+                document.getElementById('statusIcon').textContent = '❌';
+                document.getElementById('statusMessage').textContent = 'Network Error';
+                document.getElementById('statusDetails').textContent = error.message;
+            } finally {
+                btn.disabled = false;
+                loading.style.display = 'none';
+                status.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>

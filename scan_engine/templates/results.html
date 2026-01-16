@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Results - Vulnerability Scanner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            font-size: 36px;
+        }
+        
+        h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(90deg, #00d4ff, #00ff88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header-actions {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .btn {
+            padding: 10px 25px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+            font-size: 0.95rem;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #00d4ff 0%, #00ff88 100%);
+            color: #1a1a2e;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid #00d4ff;
+            color: #00d4ff;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 20px rgba(0, 212, 255, 0.3);
+        }
+        
+        .meta-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        
+        .meta-info {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .meta-label {
+            font-size: 0.8rem;
+            color: #a0a0a0;
+            margin-bottom: 3px;
+        }
+        
+        .meta-value {
+            font-weight: bold;
+            color: #fff;
+        }
+        
+        .stats-row {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .stat-badge {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: bold;
+            font-size: 0.9rem;
+        }
+        
+        .stat-badge.total {
+            background: rgba(0, 212, 255, 0.2);
+            color: #00d4ff;
+        }
+        
+        .stat-badge.vulnerable {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+        
+        .stat-badge.secure {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .results-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            overflow: hidden;
+        }
+        
+        .results-header {
+            padding: 20px 25px;
+            background: rgba(0, 0, 0, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .results-header h2 {
+            font-size: 1.2rem;
+            color: #00d4ff;
+        }
+        
+        .filter-btns {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .filter-btn {
+            padding: 6px 15px;
+            border-radius: 15px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: transparent;
+            color: #a0a0a0;
+            transition: all 0.2s ease;
+        }
+        
+        .filter-btn:hover, .filter-btn.active {
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+        
+        .filter-btn.vulnerable.active {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+        }
+        
+        .filter-btn.secure.active {
+            border-color: #00ff88;
+            color: #00ff88;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        th {
+            background: rgba(0, 0, 0, 0.2);
+            color: #a0a0a0;
+            font-weight: 600;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        tbody tr {
+            transition: background 0.2s ease;
+        }
+        
+        tbody tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+        
+        .software-name {
+            font-weight: 600;
+            color: #fff;
+        }
+        
+        .software-vendor {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+        }
+        
+        .version {
+            font-family: 'Consolas', monospace;
+            color: #00d4ff;
+        }
+        
+        .status-badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .status-vulnerable {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+        
+        .status-secure {
+            background: rgba(0, 255, 136, 0.2);
+            color: #00ff88;
+        }
+        
+        .cve-link {
+            color: #ffcc00;
+            text-decoration: none;
+            font-family: 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+        
+        .cve-link:hover {
+            text-decoration: underline;
+        }
+        
+        .severity-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        .severity-critical { background: #8b0000; color: #fff; }
+        .severity-high { background: #ff4500; color: #fff; }
+        .severity-medium { background: #ff8c00; color: #fff; }
+        .severity-low { background: #32cd32; color: #fff; }
+        .severity-info, .severity-none { background: #4a4a4a; color: #fff; }
+        
+        .solution-text {
+            font-size: 0.85rem;
+            color: #a0a0a0;
+            max-width: 300px;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            color: #a0a0a0;
+        }
+        
+        .no-results-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            color: #666;
+            font-size: 0.85rem;
+        }
+        
+        @media (max-width: 1200px) {
+            th, td {
+                padding: 12px 15px;
+            }
+            
+            .solution-text {
+                max-width: 200px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .meta-card {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .results-card {
+                overflow-x: auto;
+            }
+            
+            table {
+                min-width: 800px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-left">
+                <div class="logo">📊</div>
+                <h1>Scan Results</h1>
+            </div>
+            <div class="header-actions">
+                <a href="/" class="btn btn-secondary">← Back</a>
+                <button class="btn btn-primary" onclick="refreshScan()">🔄 Re-scan</button>
+            </div>
+        </header>
+        
+        <div class="meta-card" id="metaCard">
+            <div class="meta-info">
+                <div class="meta-item">
+                    <span class="meta-label">Scan ID</span>
+                    <span class="meta-value" id="scanId">-</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">Timestamp</span>
+                    <span class="meta-value" id="timestamp">-</span>
+                </div>
+                <div class="meta-item">
+                    <span class="meta-label">System</span>
+                    <span class="meta-value" id="systemInfo">-</span>
+                </div>
+            </div>
+            <div class="stats-row">
+                <span class="stat-badge total" id="totalBadge">0 Total</span>
+                <span class="stat-badge vulnerable" id="vulnBadge">0 Vulnerable</span>
+                <span class="stat-badge secure" id="secureBadge">0 Secure</span>
+            </div>
+        </div>
+        
+        <div class="results-card">
+            <div class="results-header">
+                <h2>🔍 Detailed Results</h2>
+                <div class="filter-btns">
+                    <button class="filter-btn active" onclick="filterResults('all')">All</button>
+                    <button class="filter-btn vulnerable" onclick="filterResults('VULNERABLE')">Vulnerable</button>
+                    <button class="filter-btn secure" onclick="filterResults('SECURE')">Secure</button>
+                </div>
+            </div>
+            
+            <table id="resultsTable">
+                <thead>
+                    <tr>
+                        <th>Software</th>
+                        <th>Version</th>
+                        <th>Status</th>
+                        <th>CVE</th>
+                        <th>Severity</th>
+                        <th>Solution</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsBody">
+                    <!-- Results will be populated by JavaScript -->
+                </tbody>
+            </table>
+            
+            <div class="no-results" id="noResults" style="display: none;">
+                <div class="no-results-icon">📭</div>
+                <p>No scan results available. Please run a scan first.</p>
+                <a href="/" class="btn btn-primary" style="margin-top: 20px;">Go to Scanner</a>
+            </div>
+        </div>
+        
+        <footer>
+            Security Vulnerability Management Pipeline v1.0
+        </footer>
+    </div>
+    
+    <script>
+        let allResults = [];
+        let currentFilter = 'all';
+        
+        async function loadResults() {
+            try {
+                const response = await fetch('/results');
+                
+                if (!response.ok) {
+                    showNoResults();
+                    return;
+                }
+                
+                const data = await response.json();
+                
+                if (data.status === 'error') {
+                    showNoResults();
+                    return;
+                }
+                
+                // Update metadata
+                document.getElementById('scanId').textContent = data.scan_id || '-';
+                document.getElementById('timestamp').textContent = 
+                    data.timestamp ? new Date(data.timestamp).toLocaleString() : '-';
+                
+                // System info
+                if (data.system_info) {
+                    document.getElementById('systemInfo').textContent = 
+                        `${data.system_info.os || ''} ${data.system_info.version || ''} (${data.system_info.hostname || ''})`;
+                }
+                
+                // Stats
+                if (data.summary) {
+                    document.getElementById('totalBadge').textContent = `${data.summary.total_software} Total`;
+                    document.getElementById('vulnBadge').textContent = `${data.summary.vulnerable_count} Vulnerable`;
+                    document.getElementById('secureBadge').textContent = `${data.summary.secure_count} Secure`;
+                }
+                
+                // Store results and render
+                allResults = data.results || [];
+                renderResults(allResults);
+                
+            } catch (error) {
+                console.error('Error loading results:', error);
+                showNoResults();
+            }
+        }
+        
+        function renderResults(results) {
+            const tbody = document.getElementById('resultsBody');
+            const noResults = document.getElementById('noResults');
+            
+            if (!results || results.length === 0) {
+                tbody.innerHTML = '';
+                noResults.style.display = 'block';
+                return;
+            }
+            
+            noResults.style.display = 'none';
+            tbody.innerHTML = '';
+            
+            results.forEach(result => {
+                const row = document.createElement('tr');
+                row.dataset.status = result.status;
+                
+                // Software name and vendor
+                row.innerHTML = `
+                    <td>
+                        <div class="software-name">${escapeHtml(result.software)}</div>
+                        <div class="software-vendor">${escapeHtml(result.vendor || '')}</div>
+                    </td>
+                    <td class="version">${escapeHtml(result.installed)}</td>
+                    <td>
+                        <span class="status-badge status-${result.status.toLowerCase()}">
+                            ${result.status === 'VULNERABLE' ? '⚠️' : '✅'} ${result.status}
+                        </span>
+                    </td>
+                    <td>
+                        ${result.cve ? 
+                            `<a href="https://nvd.nist.gov/vuln/detail/${result.cve}" target="_blank" class="cve-link">${result.cve}</a>` : 
+                            '<span style="color: #666;">-</span>'}
+                    </td>
+                    <td>
+                        <span class="severity-badge severity-${getSeverityClass(result.severity)}">
+                            ${result.severity === '0.0' ? 'N/A' : result.severity}
+                        </span>
+                    </td>
+                    <td>
+                        <div class="solution-text">${escapeHtml(result.solution || '-')}</div>
+                    </td>
+                `;
+                
+                tbody.appendChild(row);
+            });
+        }
+        
+        function filterResults(status) {
+            currentFilter = status;
+            
+            // Update button states
+            document.querySelectorAll('.filter-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+            
+            // Filter and render
+            if (status === 'all') {
+                renderResults(allResults);
+            } else {
+                const filtered = allResults.filter(r => r.status === status);
+                renderResults(filtered);
+            }
+        }
+        
+        function getSeverityClass(severity) {
+            if (!severity || severity === '0.0') return 'none';
+            const score = parseFloat(severity);
+            if (score >= 9.0) return 'critical';
+            if (score >= 7.0) return 'high';
+            if (score >= 4.0) return 'medium';
+            if (score >= 0.1) return 'low';
+            return 'info';
+        }
+        
+        function escapeHtml(text) {
+            if (!text) return '';
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function showNoResults() {
+            document.getElementById('resultsBody').innerHTML = '';
+            document.getElementById('noResults').style.display = 'block';
+            document.getElementById('metaCard').style.display = 'none';
+        }
+        
+        async function refreshScan() {
+            try {
+                const response = await fetch('/scan', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                
+                if (response.ok) {
+                    loadResults();
+                }
+            } catch (error) {
+                console.error('Error running scan:', error);
+            }
+        }
+        
+        // Load results on page load
+        document.addEventListener('DOMContentLoaded', loadResults);
+    </script>
+</body>
+</html>
