@@ -11,16 +11,18 @@ import os
 
 class FingerprintingAgent:
     
-    def __init__(self, scan_type: str = "local", target_host: str = "localhost"):
+    def __init__(self, scan_type: str = "local", target_host: str = "localhost", discover_all: bool = False):
         """
         Initialize the fingerprinting agent
         
         Args:
             scan_type: "local" or "remote"
             target_host: localhost (for local) or IP/hostname (for remote)
+            discover_all: If True, discover ALL installed software (not just predefined)
         """
         self.scan_type = scan_type
         self.target_host = target_host
+        self.discover_all = discover_all
         self.evidence_collector = EvidenceCollector()
         self.report: Optional[FingerprintReport] = None
         self.ssh_connector: Optional[SSHConnector] = None
@@ -28,6 +30,8 @@ class FingerprintingAgent:
     def scan_local(self) -> FingerprintReport:
         print("\n" + "="*60)
         print("FINGERPRINTING AGENT - LOCAL SCAN")
+        if self.discover_all:
+            print("(Discovery Mode: Scanning ALL software)")
         print("="*60)
         
         # 1. Collect system information
@@ -49,7 +53,10 @@ class FingerprintingAgent:
         
         # 2. Fingerprint installed software
         print("\n[2/3] Fingerprinting installed software...")
-        software_fingerprinter = SoftwareFingerprinter(self.evidence_collector)
+        software_fingerprinter = SoftwareFingerprinter(
+            self.evidence_collector, 
+            discover_all=self.discover_all
+        )
         software_inventory = software_fingerprinter.fingerprint_all_software()
         
         # 3. Create agent metadata
@@ -70,6 +77,7 @@ class FingerprintingAgent:
             summary={
                 "total_software_detected": len(software_inventory),
                 "scan_type": self.scan_type,
+                "discovery_mode": self.discover_all,
                 "execution_status": "success" if not errors else "partial_success"
             }
         )

@@ -1,10 +1,3 @@
-"""
-Docker Security Advisory Scraper
-
-This module scrapes vulnerability data from Docker's security announcements page
-and individual CVE detail pages.
-"""
-
 import os
 import json
 import time
@@ -16,7 +9,6 @@ from urllib.parse import urljoin
 
 
 class DockerSecurityScraper:
-    """Scraper for Docker security advisories"""
     
     BASE_URL = "https://docs.docker.com"
     SECURITY_URL = "https://docs.docker.com/security/security-announcements/"
@@ -24,18 +16,11 @@ class DockerSecurityScraper:
     def __init__(self, output_dir: str = "raw_data"):
         """
         Initialize the scraper
-        
-        Args:
-            output_dir: Directory to store scraped data
-        """
-        self.output_dir = output_dir
-        self.session = requests.Session()
-        self.session.headers.update({
-            'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36'
-        })
-        
-        # Create output directories
-        os.makedirs(output_dir, exist_ok=True)
+    
+    BASE_URL = "https://docs.docker.com"
+    SECURITY_URL = "https://docs.docker.com/security/security-announcements/"
+    
+    def __init__(self, output_dir: str = "raw_data"):makedirs(output_dir, exist_ok=True)
         os.makedirs(os.path.join(output_dir, "html"), exist_ok=True)
         os.makedirs(os.path.join(output_dir, "json"), exist_ok=True)
     
@@ -47,16 +32,6 @@ class DockerSecurityScraper:
             url: URL to fetch
             delay: Delay between requests in seconds
             
-        Returns:
-            HTML content or None if failed
-        """
-        try:
-            time.sleep(delay)
-            response = self.session.get(url, timeout=30)
-            response.raise_for_status()
-            return response.text
-        except requests.RequestException as e:
-            print(f"Error fetching {url}: {e}")
             return None
     
     def parse_main_page(self, html: str) -> List[Dict]:
@@ -77,15 +52,6 @@ class DockerSecurityScraper:
         
         for heading in headings:
             heading_text = heading.get_text(strip=True)
-            
-            # Check if this is a security update heading
-            if 'security update' in heading_text.lower() or 'cve' in heading_text.lower():
-                vuln_data = {
-                    'title': heading_text,
-                    'heading_level': heading.name,
-                    'scraped_at': datetime.now().isoformat(),
-                }
-                
                 # Extract CVE IDs from heading
                 cve_ids = self._extract_cve_ids(heading_text)
                 vuln_data['cve_ids'] = cve_ids

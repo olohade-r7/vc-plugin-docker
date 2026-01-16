@@ -2,12 +2,16 @@
 Software Fingerprinter Module
 Detects installed software products and extracts metadata
 WHY: Core component - this is what we're really interested in for vulnerability scanning
+
+FEATURES:
+- Fingerprint predefined software (TARGET_SOFTWARE in config)
+- Auto-discover ALL installed software (optional --discover mode)
 """
 
 import re
 from typing import List, Dict, Optional, Tuple, Any
 from modules.evidence_collector import EvidenceCollector
-from config import TARGET_SOFTWARE
+from config import TARGET_SOFTWARE, AUTO_DISCOVERY_CONFIG
 from models import SoftwareInventoryItem, Evidence
 import platform
 
@@ -17,18 +21,24 @@ class SoftwareFingerprinter:
     Detects specific installed software products
     Platform-aware (handles macOS, Linux, Windows differences)
     Extracts version and path information
+    
+    Two modes:
+    1. Targeted: Scans for predefined software in TARGET_SOFTWARE
+    2. Discovery: Scans for ALL installed software on the system
     """
     
-    def __init__(self, evidence_collector: EvidenceCollector):
+    def __init__(self, evidence_collector: EvidenceCollector, discover_all: bool = False):
         """
         Initialize with evidence collector
         
         Args:
             evidence_collector: EvidenceCollector instance
+            discover_all: If True, also discover non-predefined software
         """
         self.evidence = evidence_collector
         self.os_type = self._detect_os_type()
         self.target_software = TARGET_SOFTWARE
+        self.discover_all = discover_all
     
     def _detect_os_type(self) -> str:
         """Detect operating system"""
@@ -179,10 +189,224 @@ class SoftwareFingerprinter:
         
         detected_software = []
         
+        # First, scan predefined target software
         for software_name in self.target_software.keys():
             result = self.fingerprint_software(software_name)
             if result:
                 detected_software.append(result)
         
+        # If discover_all is enabled, also discover non-predefined software
+        if self.discover_all:
+            print(f"\n[*] Discovering additional software...")
+            discovered = self._discover_all_software()
+            
+            # Add only software not already in the list
+            existing_names = {s.productName.lower() for s in detected_software}
+            for item in discovered:
+                if item.productName.lower() not in existing_names:
+                    detected_software.append(item)
+                    existing_names.add(item.productName.lower())
+        
         print(f"\n[*] Found {len(detected_software)} installed software products\n")
         return detected_software
+    
+    def _discover_all_software(self) -> List[SoftwareInventoryItem]:
+        """
+        Discover ALL installed software on the system
+        Uses platform-specific commands to list installed applications
+        
+        Returns:
+            List of discovered software items
+        """
+        discovered = []
+        
+        if self.os_type not in AUTO_DISCOVERY_CONFIG:
+            print(f"  Auto-discovery not configured for {self.os_type}")
+            return discovered
+        
+        os_config = AUTO_DISCOVERY_CONFIG[self.os_type]
+        
+        # macOS: List GUI applications
+        if self.os_type == "macOS":
+            discovered.extend(self._discover_macos_apps(os_config))
+            discovered.extend(self._discover_brew_packages(os_config))
+            discovered.extend(self._discover_cli_tools(os_config))
+        
+        # Linux: List installed packages
+        elif self.os_type == "Linux":
+            discovered.extend(self._discover_linux_packages(os_config))
+            discovered.extend(self._discover_cli_tools(os_config))
+        
+        return discovered
+    
+    def _discover_macos_apps(self, config: Dict) -> List[SoftwareInventoryItem]:
+        """Discover macOS applications in /Applications"""
+        discovered = []
+        
+        if "list_apps" not in config:
+            return discovered
+        
+        success, output, _ = self.evidence.execute_command_locally(
+            config["list_apps"],
+            description="discover_macos_apps",
+            timeout=10
+        )
+        
+        if success and output:
+            for app_name in output.strip().split('\n'):
+                if app_name.strip():
+                    # Try to get version from Info.plist
+                    version_cmd = f"defaults read '/Applications/{app_name}.app/Contents/Info' CFBundleShortVersionString 2>/dev/null || echo 'unknown'"
+                    _, version, _ = self.evidence.execute_command_locally(
+                        version_cmd, description=f"version_{app_name}", timeout=3
+                    )
+                    
+                    discovered.append(SoftwareInventoryItem(
+                        productName=app_name.strip(),
+                        versionNumber=version.strip() if version else "unknown",
+                        architecture="unknown",
+                        productFamily="Application",
+                        vendor="Unknown",
+                        installPath=f"/Applications/{app_name}.app",
+                        evidence=Evidence(
+                            command_run=config["list_apps"],
+                            raw_output=app_name
+                        )
+                    ))
+        
+        return discovered
+    
+    def _discover_brew_packages(self, config: Dict) -> List[SoftwareInventoryItem]:
+        """Discover Homebrew packages"""
+        discovered = []
+        
+        if "list_brew" not in config:
+            return discovered
+        
+        success, output, _ = self.evidence.execute_command_locally(
+            config["list_brew"],
+            description="discover_brew_packages",
+            timeout=30
+        )
+        
+        if success and output:
+            for line in output.strip().split('\n'):
+                parts = line.strip().split()
+                if len(parts) >= 2:
+                    name = parts[0]
+                    version = parts[1] if len(parts) > 1 else "unknown"
+                    
+                    discovered.append(SoftwareInventoryItem(
+                        productName=name,
+                        versionNumber=version,
+                        architecture="unknown",
+                        productFamily="Homebrew Package",
+                        vendor="Unknown",
+                        installPath=f"/opt/homebrew/Cellar/{name}",
+                        evidence=Evidence(
+                            command_run=config["list_brew"],
+                            raw_output=line
+                        )
+                    ))
+        
+        return discovered
+    
+    def _discover_cli_tools(self, config: Dict) -> List[SoftwareInventoryItem]:
+        """Discover common CLI tools"""
+        discovered = []
+        
+        if "list_cli" not in config:
+            return discovered
+        
+        success, output, _ = self.evidence.execute_command_locally(
+            config["list_cli"],
+            description="discover_cli_tools",
+            timeout=30
+        )
+        
+        if success and output:
+            for line in output.strip().split('\n'):
+                if '|' in line:
+                    parts = line.split('|', 1)
+                    name = parts[0].strip()
+                    version_str = parts[1].strip() if len(parts) > 1 else "unknown"
+                    
+                    # Extract version number from output
+                    version = self._parse_version_string(version_str)
+                    
+                    discovered.append(SoftwareInventoryItem(
+                        productName=name,
+                        versionNumber=version,
+                        architecture="unknown",
+                        productFamily="CLI Tool",
+                        vendor="Unknown",
+                        installPath=None,
+                        evidence=Evidence(
+                            command_run="which " + name,
+                            raw_output=version_str
+                        )
+                    ))
+        
+        return discovered
+    
+    def _discover_linux_packages(self, config: Dict) -> List[SoftwareInventoryItem]:
+        """Discover Linux packages (apt/rpm/snap/flatpak)"""
+        discovered = []
+        
+        # Try apt (Debian/Ubuntu)
+        if "list_apt" in config:
+            success, output, _ = self.evidence.execute_command_locally(
+                config["list_apt"],
+                description="discover_apt_packages",
+                timeout=30
+            )
+            
+            if success and output:
+                for line in output.strip().split('\n')[:100]:  # Limit to first 100
+                    if '|' in line:
+                        parts = line.split('|')
+                        name = parts[0].strip()
+                        version = parts[1].strip() if len(parts) > 1 else "unknown"
+                        
+                        discovered.append(SoftwareInventoryItem(
+                            productName=name,
+                            versionNumber=version,
+                            architecture="unknown",
+                            productFamily="System Package",
+                            vendor="Unknown",
+                            installPath=None,
+                            evidence=Evidence(
+                                command_run=config["list_apt"],
+                                raw_output=line
+                            )
+                        ))
+        
+        # Try rpm (RHEL/CentOS/Fedora)
+        if "list_rpm" in config and not discovered:
+            success, output, _ = self.evidence.execute_command_locally(
+                config["list_rpm"],
+                description="discover_rpm_packages",
+                timeout=30
+            )
+            
+            if success and output:
+                for line in output.strip().split('\n')[:100]:  # Limit to first 100
+                    if '|' in line:
+                        parts = line.split('|')
+                        name = parts[0].strip()
+                        version = parts[1].strip() if len(parts) > 1 else "unknown"
+                        
+                        discovered.append(SoftwareInventoryItem(
+                            productName=name,
+                            versionNumber=version,
+                            architecture="unknown",
+                            productFamily="System Package",
+                            vendor="Unknown",
+                            installPath=None,
+                            evidence=Evidence(
+                                command_run=config["list_rpm"],
+                                raw_output=line
+                            )
+                        ))
+        
+        return discovered

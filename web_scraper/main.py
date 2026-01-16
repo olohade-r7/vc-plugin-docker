@@ -1,17 +1,6 @@
-"""
-Main Pipeline Orchestrator
-
-This script coordinates the complete vulnerability content generation pipeline:
-1. Scrape Docker security advisories
-2. Parse and validate data with Pydantic models
-3. Transform into Rapid7 content files (.xml, .vck, .sol)
-4. Store files in Content/Docker directory
-"""
-
 import os
 import json
-import sys
-from typing import List, Dict
+from typing import Dict
 from datetime import datetime
 
 from scraper import DockerSecurityScraper
@@ -34,21 +23,12 @@ class VulnerabilityContentGenerator:
             content_dir: Directory to store generated content files
         """
         self.raw_data_dir = raw_data_dir
-        self.content_dir = content_dir
-        self.parser = VulnerabilityParser()
-        self.file_manager = ContentFileManager(content_dir)
     
-    def load_scraped_data(self) -> Dict:
-        """Load scraped vulnerability data from JSON"""
-        json_path = os.path.join(self.raw_data_dir, "json", "all_vulnerabilities.json")
-        
-        if not os.path.exists(json_path):
-            raise FileNotFoundError(f"Scraped data not found at {json_path}. Run scraper first.")
+    def __init__(self, raw_data_dir: str = "raw_data", content_dir: str = "Content/Docker"): raise FileNotFoundError(f"Scraped data not found at {json_path}. Run scraper first.")
         
         with open(json_path, 'r', encoding='utf-8') as f:
             return json.load(f)
-    
-    def parse_vulnerability(self, raw_vuln: Dict) -> VulnerabilityContent:
+    parse_vulnerability(self, raw_vuln: Dict) -> VulnerabilityContent:
         """
         Parse raw vulnerability data into Pydantic models
         
@@ -58,15 +38,6 @@ class VulnerabilityContentGenerator:
         Returns:
             VulnerabilityContent object
         """
-        # Extract basic information
-        title = raw_vuln.get('title', 'Unknown Vulnerability')
-        description = raw_vuln.get('description', '')
-        cve_ids = raw_vuln.get('cve_ids', [])
-        
-        if not cve_ids:
-            # Extract from title if not found
-            import re
-            cve_ids = re.findall(r'CVE-\d{4}-\d{4,7}', title)
         
         # Determine severity from title or content
         severity = SeverityLevel.MEDIUM  # Default
@@ -135,16 +106,12 @@ class VulnerabilityContentGenerator:
             # Use actual details if available
             detailed_steps = [f"{i+1}. {detail}" for i, detail in enumerate(details[:6])]
         
-        # External references
         external_refs = []
         for link_data in raw_vuln.get('cve_links', []):
             external_refs.append(link_data.get('url', ''))
-        
-        # Add release notes link if available
         external_refs.append("https://docs.docker.com/desktop/release-notes/")
         external_refs.append("https://docs.docker.com/security/security-announcements/")
         
-        # Create vulnerability detail
         vuln_detail = VulnerabilityDetail(
             title=title,
             description=description or "Security vulnerability in Docker Desktop",
@@ -156,21 +123,6 @@ class VulnerabilityContentGenerator:
             published_date=datetime.now(),
             raw_data=raw_vuln
         )
-        
-        # Create vulnerability check
-        primary_cve = cve_ids[0] if cve_ids else "UNKNOWN"
-        check_id = f"docker-{primary_cve.lower().replace('cve-', 'cve-')}"
-        
-        vulnerable_versions = []
-        safe_versions = []
-        
-        if fixed_version:
-            import re
-            version_match = re.search(r'([\d.]+)', fixed_version)
-            if version_match:
-                version_num = version_match.group(1)
-                vulnerable_versions.append(f"< {version_num}")
-                safe_versions.append(f">= {version_num}")
         
         check = VulnerabilityCheck(
             check_id=check_id,

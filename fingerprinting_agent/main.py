@@ -10,14 +10,20 @@ def main():
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""
 Examples:
-  # Local scan
+  # Local scan (predefined software only)
   python main.py --local
+  
+  # Local scan with auto-discovery (ALL software)
+  python main.py --local --discover
   
   # Remote scan with SSH key
   python main.py --remote 192.168.1.100 --user admin --key ~/.ssh/id_rsa
   
   # Remote scan with password
   python main.py --remote 192.168.1.100 --user admin --password mypass
+  
+  # Remote scan with discovery mode
+  python main.py --remote 192.168.1.100 --user admin --password mypass --discover
         """
     )
     
@@ -32,6 +38,14 @@ Examples:
         "--remote",
         metavar="HOSTNAME",
         help="Run remote fingerprinting scan via SSH"
+    )
+    
+    # Discovery mode
+    parser.add_argument(
+        "--discover",
+        action="store_true",
+        help="Enable auto-discovery mode: detect ALL installed software (not just predefined). "
+             "This scans applications, packages (brew/apt/rpm), and CLI tools."
     )
     
     # Remote scan options
@@ -65,12 +79,24 @@ Examples:
     try:
         if args.local:
             print("\n[*] Initializing local fingerprinting agent...")
-            agent = FingerprintingAgent(scan_type="local", target_host="localhost")
+            if args.discover:
+                print("[*] Discovery mode ENABLED - scanning ALL software")
+            agent = FingerprintingAgent(
+                scan_type="local", 
+                target_host="localhost",
+                discover_all=args.discover
+            )
             agent.scan_local()
             
         else:
             print(f"\n[*] Initializing remote fingerprinting agent...")
-            agent = FingerprintingAgent(scan_type="remote", target_host=args.remote)
+            if args.discover:
+                print("[*] Discovery mode ENABLED - scanning ALL software")
+            agent = FingerprintingAgent(
+                scan_type="remote", 
+                target_host=args.remote,
+                discover_all=args.discover
+            )
             agent.scan_remote(
                 hostname=args.remote,
                 username=args.user,
